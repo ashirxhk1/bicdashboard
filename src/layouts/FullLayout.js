@@ -11,9 +11,9 @@ const FullLayout = () => {
     <main>
       <div className="pageWrapper d-lg-flex">
         {/********Sidebar**********/}
-        <aside className={`sidebarArea shadow ${isSidebarOpen ? 'd-none' : ''}`} id="sidebarArea">
+        {/* <aside className={`sidebarArea shadow ${isSidebarOpen ? 'd-none' : ''}`} id="sidebarArea">
           <Sidebar />
-        </aside>
+        </aside> */}
         {/********Content Area**********/}
 
         <div className="contentArea">

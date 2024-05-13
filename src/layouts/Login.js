@@ -1,6 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Navigate,useNavigate } from 'react-router-dom';
-
+import { LoginApi } from '../features/Login';
 import {
   MDBBtn,
   MDBContainer,
@@ -13,12 +13,25 @@ import {
   MDBIcon
 }
 from 'mdb-react-ui-kit';
-
+import Cookies from 'universal-cookie';
+const cookie = new Cookies()
 function Login() {
+  const[email,setEmail] = useState('')
+  const[password,setPassword] = useState('')
   const nav = useNavigate()
-  function clii(){
-    nav('bi/starter')
+  async function clii(){
+    let data = {email,password}
+    const res = await LoginApi(data)
+    
+    if(res.data.success === true){
+      localStorage.setItem("userData",
+      JSON.stringify({email:res.data.user.email,id:res.data.user._id}))
+      cookie.set('token',res.data.token)
+      nav('bi/profile')
+    }
+    // nav('bi/profile')
   }
+  
   // <Navigate to="/starter#/starter" />
   return (
     <MDBContainer fluid className='p-4 background-radial-gradient overflow-hidden'>
@@ -51,8 +64,13 @@ function Login() {
 
               
 
-              <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email'/>
-              <MDBInput wrapperClass='mb-4' label='Password' id='form4' type='password'/>
+              <MDBInput wrapperClass='mb-4' label='Email' id='form3' type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}/>
+              <MDBInput wrapperClass='mb-4' label='Password' id='form4'          type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              />
 
               <div className='d-flex justify-content-start mb-4'>
                 <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />

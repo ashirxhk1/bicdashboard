@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
-
+import Auth from "../Auth.js";
 /****Layouts*****/
 const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 
@@ -28,7 +28,7 @@ const ThemeRoutes = [
     path: "/bi",
     element: <FullLayout />,
     children: [
-      { path: "/bi/starter", exact: true, element: <Starter /> },
+      // { path: "/bi/starter", exact: true, element: <Starter /> },
       {path:"/bi/profile",exact :true,element:<AgentProfile/>},
       {path:"/bi/agentform",exact :true,element:<AgentForm/>},
       {path:"/bi/escalationform",exact :true,element:<EscalationForm/>},

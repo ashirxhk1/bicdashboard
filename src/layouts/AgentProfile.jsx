@@ -1,14 +1,26 @@
 import { lazy } from "react"
-import { Container, Row, Col } from "reactstrap"
+import { useNavigate } from "react-router-dom"
+import { Container, Row, Col,Button} from "reactstrap"
 const UserDetails = lazy(() => import("../components/Profile/UserDetails.jsx"))
 const Conversation = lazy(() => import("../components/Profile/Conversation.jsx"))
 const AgentCalls = lazy(() => import("../components/Profile/AgentCalls.jsx"))
 
 const AgentProfile = () => {
+    const Navigation = useNavigate()
+    const Nav = () =>{
+        Navigation('/bi/agentform')
+    }
+    const Escalation = () =>{
+        Navigation('/bi/escalationform')
+    }
     return (
         // <Container>
-        <div>
-            <Row>
+        <div className="d-flex justify-content-center align-items-center">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <Button className="btn btn-outline-success me-md-2"onClick={Nav}> Evaluation</Button>
+                    <Button className="btn btn-outline-danger me-md-2"onClick={Escalation}> Escalation</Button>
+            </div>
+            {/* <Row>
                 <Col lg='4' md='6' xs='12' className="px-0">
                     <UserDetails />
                 </Col>
@@ -18,7 +30,7 @@ const AgentProfile = () => {
                 <Col lg='4' md='6' xs='12' className="px-0">
                     <AgentCalls />
                 </Col>
-            </Row>
+            </Row> */}
         </div>
         // </Container> 
     )

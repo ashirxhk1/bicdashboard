@@ -30,6 +30,13 @@ const AgentForm = () => {
       </label>
     </div>
             </div>
+            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='d-flex flex-start p-4'>
+      <label>Evaluated by: <br />
+        <input className='border-none' type="text" placeholder="Enter Your Name Here"  />
+      </label>
+    </div>
+            </div>
         <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
           <h3 className='p-4'>Mode of Communication</h3>
         <form class='bg-gray px-4'>

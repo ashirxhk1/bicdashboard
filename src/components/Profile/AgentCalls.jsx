@@ -3,13 +3,7 @@ import { Card, CardBody, CardTitle, Button } from "reactstrap";
 import ReactAudioPlayer from 'react-audio-player';
 import { useNavigate } from 'react-router-dom'
 const AgentCalls = () => {
-    const Navigation = useNavigate()
-    const Nav = () =>{
-        Navigation('/bi/agentform')
-    }
-    const Escalation = () =>{
-        Navigation('/bi/escalationform')
-    }    
+       
     return (
         <div className='p-3'>
             <Card>
@@ -39,11 +33,11 @@ const AgentCalls = () => {
                     </div>
                 </CardBody>
             </Card>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            {/* <div class="d-grid gap-2 d-md-flex justify-content-md-end">
   <Button className="btn btn-outline-success me-md-2"onClick={Nav}> Evaluation</Button>
   <Button className="btn btn-outline-danger me-md-2"onClick={Escalation}> Escalation</Button>
 
-</div>
+</div> */}
         </div>
         
     )
