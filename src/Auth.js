@@ -1,15 +1,16 @@
 import Cookies from "universal-cookie";
-import React from 'react'
-import { useNavigate,Outlet} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 const cookie = new Cookies()
-const Auth = () => {
+
+const Auth = ({children}) => {
     const nav = useNavigate()
     let token = cookie.get('token')
-    return (
-        <>
-        {token ? <Outlet/> : nav('/')}
-        </>
-    )
+    if(token){
+        return token ? children : nav('/login')
+    }
+    return nav('/login')
 }
 
 export default Auth
+
+

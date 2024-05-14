@@ -25,3 +25,13 @@ export const escalationApi = async (data) => {
     })
     return res
 }
+
+export const evaluationApi = async (data) => {
+    let token = cookie.get('token')
+    const res = await axios.post(`http://localhost:8000/createEvaluation`,data,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}

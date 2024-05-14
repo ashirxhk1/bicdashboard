@@ -13,31 +13,37 @@ import {
   MDBIcon,
 } from "mdb-react-ui-kit";
 import Cookies from "universal-cookie";
+import { Button } from "reactstrap";
 const cookie = new Cookies();
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const nav = useNavigate();
-  async function clii() {
-    let data = { email, password };
-    const res = await LoginApi(data);
 
-    if (res.data.success === true) {
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({ email: res.data.user.email, id: res.data.user._id })
-      );
-      cookie.set("token", res.data.token);
-      nav("bi/profile");
+  async function clii() {
+    if(email.trim() === '' || password.trim() === ''){
+      alert('please fill fields')
+      return
+    }else{
+      let data = { email, password };
+      const res = await LoginApi(data);
+
+      if (res.data.success === true) {
+        localStorage.setItem(
+          "userData",
+          JSON.stringify({ email: res.data.user.email, id: res.data.user._id })
+        );
+        cookie.set("token", res.data.token);
+        nav("bi/profile");
+      }
     }
     // nav('bi/profile')
   }
 
-  // <Navigate to="/starter#/starter" />
   return (
     <MDBContainer
       fluid
-      className="p-4 background-radial-gradient overflow-hidden"
+      className="p-4 background-radial-gradient overflow-hidden d-flex justify-content-center align-items-center"
     >
       <MDBRow>
         <MDBCol
@@ -60,7 +66,7 @@ function Login() {
           </p>
         </MDBCol>
 
-        <MDBCol md="6" className="position-relative">
+        <MDBCol md="6" className="position-relative d-flex justify-content-center align-items-center">
           <div
             id="radius-shape-1"
             className="position-absolute rounded-circle shadow-5-strong"
@@ -98,9 +104,9 @@ function Login() {
                 />
               </div>
 
-              <MDBBtn className="w-100 mb-4" size="md" onClick={clii}>
+              <Button className="w-100 signupBtn" onClick={clii}>
                 Sign-in
-              </MDBBtn>
+              </Button>
 
               <div className="text-center">
                 <MDBBtn
