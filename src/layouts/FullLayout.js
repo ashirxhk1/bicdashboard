@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { Container } from "reactstrap";
 import { useSidebar } from "../context/SidebarContext";
+import Cookies from "universal-cookie";
 const FullLayout = () => {
+  const token = new Cookies()
+  const navigate = useNavigate()
   // const [toggleSidebar,setToggleSidebar] = useState()
   const { isSidebarOpen } = useSidebar();
+ 
   return (
     <main>
       <div className="pageWrapper d-lg-flex">

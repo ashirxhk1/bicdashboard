@@ -14,23 +14,23 @@ import {
   Button,
 } from "reactstrap";
 import Cookies from "universal-cookie";
-import {  logoutApi } from "../features/Login";
+import { logoutApi } from "../features/userApis";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/bi2.svg";
 import user2 from "../assets/images/users/user2.jpg";
-const cookie = new Cookies
+const cookie = new Cookies();
 const Header = () => {
-  const nav = useNavigate()
+  const nav = useNavigate();
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   const handlerLogout = async () => {
-    const res = await logoutApi()
-    if(res.data.success === true){
-      localStorage.removeItem('userData') 
-      cookie.remove('token')
-      nav('/') 
+    const res = await logoutApi();
+    if (res.data.success === true) {
+      localStorage.removeItem("userData");
+      cookie.remove("token");
+      nav("/");
     }
-  }
+  };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
@@ -93,7 +93,8 @@ const Header = () => {
           </UncontrolledDropdown>
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle color="transparent">l
+          <DropdownToggle color="transparent">
+            l
             <img
               src={user2}
               alt="profile"

@@ -45,5 +45,10 @@
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
   }
-
+.signupBtn{
+  background-color: #009EFB;
+}
+.radioIn{
+  width:21px;
+}
 
