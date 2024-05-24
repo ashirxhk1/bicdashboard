@@ -3,10 +3,15 @@ import Cookies from "universal-cookie"
 const cookie = new Cookies
 
 export const LoginApi = async (data) => {
-    let token = cookie.get('token')
     const res = await axios.post(`http://localhost:8000/login`,data)
     return res
 }
+
+export const LeadRegister = async (data) => {
+    const res = await axios.post(`http://localhost:8000/register`,data)
+    return res
+}
+
 export const logoutApi = async () => {
     let token = cookie.get('token')
     const res = await axios.get(`http://localhost:8000/logout`,{
@@ -29,6 +34,36 @@ export const escalationApi = async (data) => {
 export const evaluationApi = async (data) => {
     let token = cookie.get('token')
     const res = await axios.post(`http://localhost:8000/createEvaluation`,data,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
+export const fetchleaders = async () => {
+    let token = cookie.get('token')
+    const res = await axios.get(`http://localhost:8000/fetchleaders`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
+export const createteamLeaders = async (data) => {
+    let token = cookie.get('token')
+    const res = await axios.post(`http://localhost:8000/createteamLeaders`,data,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
+export const leaddelete = async (id) => {
+    let token = cookie.get('token')
+    const res = await axios.delete(`http://localhost:8000/leaddelete/${id}`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
