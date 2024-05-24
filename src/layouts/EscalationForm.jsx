@@ -78,12 +78,12 @@ const EscalationForm = () => {
   return (
     <div className='d-flex justify-content-center'>
         <div className='w-50 bg-gray d-flex flex-column gap-3'>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column align-items-center my-60px mx-50px'>
+            <div className='bg-light rounded d-flex justify-content-center flex-column align-items-center my-60px mx-50px'>
                 <h1 className='fw-bolder'>BRIGHT IDEA'S</h1>
                 <p>COMMUNICATION</p>
                 <h3 className='text-danger'>Escalation Form</h3>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column '>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column '>
   
     <div className='d-flex flex-start p-4'>
       <label>Enter your email: <br />
@@ -93,7 +93,7 @@ const EscalationForm = () => {
     </div>
 
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label>lead ID: <br />
         <Input className='border-none' type="text" placeholder="Enter Your Lead ID Here" value={escalation.leadId}
@@ -101,7 +101,7 @@ const EscalationForm = () => {
       </label>
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label>Evaluated by: <br />
         <Input className='border-none' type="text" placeholder="Enter Your Name Here" value={escalation.evaluatedBy}
@@ -109,7 +109,7 @@ const EscalationForm = () => {
       </label>
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label>Agent Name: <br />
         <Input className='border-none' type="text" placeholder="Enter Agent Name Here" value={escalation.agentName}
@@ -117,7 +117,7 @@ const EscalationForm = () => {
       </label>
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
               <h3 className='mx-4 mt-2'>Team Leader</h3>
         <form class='bg-gray px-4 py-2 mt-0'>
           <label><Input className='m-1' type='radio' name="Department" id="lead" value="ERC Dubai" 
@@ -131,7 +131,7 @@ const EscalationForm = () => {
           <br/>
       </form>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className=' p-4'>    
               <h3>Lead Source</h3>
     <label><Input className='m-2' type="radio" id="social" name="account" value="Facebook" checked={escalation.leadSource === 'Facebook'} 
@@ -148,7 +148,7 @@ const EscalationForm = () => {
       onChange={(e) => handlerEscalation("leadSource",e.target.value)} />PPC</label> <br />
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label><h4>Lead Status</h4>
         <p>What is the parked status of the lead?</p>
@@ -158,7 +158,7 @@ const EscalationForm = () => {
       </label>
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
               <div className='p-4'>
                 <h3>Escalation Severity</h3>
                 <label className='d-flex align-items-center'><Input className='m-3' type="radio" id="sev" name="Severity" value="Urgent Action required" checked={escalation.escSeverity === 'Urgent Action required'}
@@ -169,7 +169,7 @@ const EscalationForm = () => {
                   onChange={(e) => handlerEscalation("escSeverity",e.target.value)} />Repeated</label>
               </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column '>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column '>
             <div className='p-4'>
             <h3>Issue Identification</h3>
     <label className='d-flex align-items-center gap-1 '><Input className='m-3' type="radio" id="issue" name="Issue" value="Facebook" checked={escalation.issueIden === 'Facebook'} 
@@ -184,7 +184,7 @@ const EscalationForm = () => {
       onChange={(e) => handlerEscalation("issueIden",e.target.value)} />SOP's: Failing to update BITRIX or BOOKING Software in a proper manner</label> <br />
     </div>
             </div>
-            <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='p-4'>
      <h3>Escalation Action</h3>
     <label className='d-flex align-items-center'><Input className='m-3' type="radio" id="action" name="Action" value="Facebook" checked={escalation.escAction === 'Facebook'} 
@@ -200,7 +200,7 @@ const EscalationForm = () => {
       
     </div>
             </div>
-    <div className='bg-secondary text-white rounded d-flex justify-content-center flex-column'>
+    <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label><h4>Additional successrmation</h4>
         <p>Provide any additional successrmation relevant to the issue</p>

@@ -40,7 +40,7 @@ const Header = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
   return (
-    <Navbar color="primary" dark expand="md" className="bg-gradient">
+    <Navbar color="warning" dark expand="md" className="bg-gradient">
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
           <LogoWhite />
