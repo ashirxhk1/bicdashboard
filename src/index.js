@@ -8,6 +8,7 @@ import { HashRouter } from "react-router-dom";
 import Loader from "./layouts/loader/Loader";
 import "./index.css";
 import { SidebarProvider } from "./context/SidebarContext";
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

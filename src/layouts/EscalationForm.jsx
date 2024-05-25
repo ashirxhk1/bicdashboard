@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Input } from 'reactstrap'
-import { escalationApi } from '../features/userApis'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { escalationApi,fetchleaders,leaddelete } from '../features/userApis'
+import LeadModel from '../views/ui/LeadModel'
+
 const EscalationForm = () => {
   const [otherReason, setOtherReason] = useState('');
+  const [leaders,setLeader] = useState([])
+  const [fetchLatestUser,setFetchLatestUser] = useState(false)
   const [escalation,setEscalation] = useState({
     email:'',
     leadId:'',
@@ -33,6 +38,31 @@ const EscalationForm = () => {
       handlerEscalation('escAction',otherReason)
     }
   },[otherReason])
+
+  const fetchlead = async () => {
+    let data = await fetchleaders()
+    setLeader(data)
+  }
+
+  useEffect(() => {
+    fetchlead()
+  },[])
+
+  useEffect(() => {
+    const fetchlead = async () => {
+      let data = await fetchleaders()
+      setLeader(data)
+      setFetchLatestUser(false)
+    }
+    fetchlead()
+  },[fetchLatestUser])
+
+  const handlerDel = async (id) => {
+    const {data} = await leaddelete(id)
+    if(data.success){
+      fetchlead()
+    }
+  }
 
   const handlerEscForm = async () => {
     if(
@@ -74,6 +104,7 @@ const EscalationForm = () => {
       }
     }
   }
+
 
   return (
     <div className='d-flex justify-content-center'>
@@ -118,18 +149,18 @@ const EscalationForm = () => {
     </div>
             </div>
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
-              <h3 className='mx-4 mt-2'>Team Leader</h3>
-        <form class='bg-gray px-4 py-2 mt-0'>
-          <label><Input className='m-1' type='radio' name="Department" id="lead" value="ERC Dubai" 
-            onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === 'ERC Dubai'} defaultChecked></Input>Fawad Ali (ERC Dubai)</label><br />
-          <label><Input className='m-1' type='radio' name="Department" id="lead" value="ERC Abu Dhabi" 
-            onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === 'ERC Abu Dhabi'}/>Muhammad Abdullah Akram (ERC Abu Dhabi)</label><br />
-          <label><Input className='m-1' type='radio' name="Department" id="lead" value="Dynamic" 
-            onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === 'Dynamic'}/>Muhammad Abubakar (Dynamic)</label><br />
-          <label><Input className='m-1' type='radio' name="Department" id="lead" value="Jordan" 
-            onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === 'Jordan'}/>Yousef Almaani (Jordan)</label>
-          <br/>
-      </form>
+              <div className='d-flex justify-content-between align-items-center mx-4'>
+                <h3 className='mt-2'>Team Leader</h3>
+                <div><LeadModel setFetchLatestUser={setFetchLatestUser}/></div>
+              </div>
+              {leaders?.data?.data?.length < 0 ? <div>Loading...</div> : leaders?.data?.data?.map((val,index) => (
+                <form class='bg-gray px-4 py-2 mt-0 w-100  d-flex justify-content-between align-items-center' key={index}>
+                  <label className='w-100'><Input className='m-1' type='radio' name="Department" id="lead" value={`${val.leadName}`} 
+                    onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === `${val.leadName}`}></Input>{val.leadName}</label>
+                     <i class="bi bi-x-octagon"style={{fontSize:'20px',cursor:'pointer'}} onClick={() => handlerDel(val._id)}></i>
+                     <br />
+                </form>
+              ))}
             </div>
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className=' p-4'>    

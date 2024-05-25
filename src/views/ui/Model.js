@@ -1,52 +1,68 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
-
+import { LeadRegister } from '../../features/userApis';
 const Models= () => {
   const [modal, setModal] = useState(false);
-
+  const [credential,setCredential] = useState({email:'',password:''})
   const toggle = () => setModal(!modal);
+  const handleChange = (name,value) => {
+    setCredential((pre) => ({
+        ...pre,
+        [name]:value
+    }))
+  }
+
+  const handlerRegister = async () => {
+    const {data} = await LeadRegister(credential)
+    if(credential.email.trim() ==='' || credential.password.trim() === ''){
+      alert("field required to fill!")
+      return
+    } 
+    if(data.success){
+      alert("Team Leader Added!")
+      setCredential({email:'',password:''})
+    }
+  }
+
 
   return (
     <div>
       <Button onClick={toggle}>
-        Add Agent
+        Add Team Lead
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add user</ModalHeader>
         <ModalBody>
         <Form>
               <FormGroup>
-                <Label for="username">Name</Label>
-                <Input
-                  id="username"
-                  name="name"
-                  placeholder="Enter Agent Name"
-                  type="name"
-                />
-              </FormGroup>
-              <FormGroup>
                 <Label for="useremail">Email</Label>
                 <Input
                   id="useremail"
                   name="email"
-                  placeholder="Enter Agent Email"
+                  placeholder="Enter Lead email"
                   type="email"
+                  value={credential.email}
+                  onChange={(e) => handleChange('email',e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="usernumber">Extension</Label>
+                <Label for="userpass">Password</Label>
                 <Input
-                  id="usernumber"
-                  name="number"
-                  placeholder="Enter Agent Extension"
-                  type="number"
-                  min="10" max="15"
+                  id="userpass"
+                  name="password"
+                  placeholder="Enter Lead Paaword"
+                  type="password"
+                  value={credential.password}
+                  onChange={(e) => handleChange('password',e.target.value)}
                 />
               </FormGroup>
               </Form>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggle}>
+          <Button color="primary" onClick={() => {
+            handlerRegister()
+            toggle()
+          }}>
             Submit
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
