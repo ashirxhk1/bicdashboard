@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { LeadRegister } from '../../features/userApis';
 const Models= () => {
   const [modal, setModal] = useState(false);
-  const [credential,setCredential] = useState({email:'',password:''})
+  const [credential,setCredential] = useState({email:'',password:'',role:'user'})
   const toggle = () => setModal(!modal);
   const handleChange = (name,value) => {
     setCredential((pre) => ({

@@ -6,6 +6,7 @@ const Login = lazy(() => import("../layouts/Login.js"));
 const AgentProfile = lazy(() => import("../layouts/AgentProfile.jsx"));
 const AgentForm = lazy(() => import("../layouts/AgentForm.jsx"));
 const EscalationForm = lazy(() => import("../layouts/EscalationForm.jsx"));
+const UserDetails = lazy(() => import("../layouts/UserDetails.jsx"))
 
 const ThemeRoutes = [
   {
@@ -16,6 +17,7 @@ const ThemeRoutes = [
       {path:"/bi/profile",exact :true,element:(<Auth><AgentProfile/></Auth>)},
       {path:"/bi/agentform",exact :true,element:(<Auth><AgentForm/></Auth>)},
       {path:"/bi/escalationform",exact :true,element:<Auth><EscalationForm/></Auth>},
+      {path:"/bi/userdetails/:id",exact:true,element:<Auth><UserDetails/></Auth>}
     ],
   },
   {

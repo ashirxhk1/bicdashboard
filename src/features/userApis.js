@@ -13,7 +13,7 @@ export const LeadRegister = async (data) => {
 }
 
 export const logoutApi = async () => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.get(`http://localhost:8000/logout`,{
         headers:{
             Authorization: `Bearer ${token}`
@@ -22,7 +22,7 @@ export const logoutApi = async () => {
     return res
 }
 export const escalationApi = async (data) => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.post(`http://localhost:8000/createEscalation`,data,{
         headers:{
             Authorization: `Bearer ${token}`
@@ -32,7 +32,7 @@ export const escalationApi = async (data) => {
 }
 
 export const evaluationApi = async (data) => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.post(`http://localhost:8000/createEvaluation`,data,{
         headers:{
             Authorization: `Bearer ${token}`
@@ -42,7 +42,7 @@ export const evaluationApi = async (data) => {
 }
 
 export const fetchleaders = async () => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.get(`http://localhost:8000/fetchleaders`,{
         headers:{
             Authorization: `Bearer ${token}`
@@ -51,8 +51,18 @@ export const fetchleaders = async () => {
     return res
 }
 
+export const fetchallusers = async () => {
+    let token = cookie.get('bictoken')
+    const res = await axios.get(`http://localhost:8000/getallusers`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
 export const createteamLeaders = async (data) => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.post(`http://localhost:8000/createteamLeaders`,data,{
         headers:{
             Authorization: `Bearer ${token}`
@@ -62,7 +72,7 @@ export const createteamLeaders = async (data) => {
 }
 
 export const leaddelete = async (id) => {
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     const res = await axios.delete(`http://localhost:8000/leaddelete/${id}`,{
         headers:{
             Authorization: `Bearer ${token}`

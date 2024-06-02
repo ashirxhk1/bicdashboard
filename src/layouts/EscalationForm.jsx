@@ -3,8 +3,11 @@ import { Input } from 'reactstrap'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { escalationApi,fetchleaders,leaddelete } from '../features/userApis'
 import LeadModel from '../views/ui/LeadModel'
+import { useNavigate } from 'react-router-dom';
 
 const EscalationForm = () => {
+  const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('bicuserData'))
   const [otherReason, setOtherReason] = useState('');
   const [leaders,setLeader] = useState([])
   const [fetchLatestUser,setFetchLatestUser] = useState(false)
@@ -81,7 +84,7 @@ const EscalationForm = () => {
       alert("Please fill fields!")
       return
     }else{
-      const getUser = JSON.parse(localStorage.getItem('userData'))
+      const getUser = JSON.parse(localStorage.getItem('bicuserData'))
       const id = getUser.id
       escalation._id = id
       const data = await escalationApi(escalation)
@@ -101,6 +104,7 @@ const EscalationForm = () => {
           successmaration:''
         })
         alert("Successfully Created!")
+        navigate("/bi/profile")
       }
     }
   }
@@ -151,13 +155,13 @@ const EscalationForm = () => {
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
               <div className='d-flex justify-content-between align-items-center mx-4'>
                 <h3 className='mt-2'>Team Leader</h3>
-                <div><LeadModel setFetchLatestUser={setFetchLatestUser}/></div>
+                {user.role === 'admin' && <div><LeadModel setFetchLatestUser={setFetchLatestUser}/></div>}
               </div>
               {leaders?.data?.data?.length < 0 ? <div>Loading...</div> : leaders?.data?.data?.map((val,index) => (
                 <form class='bg-gray px-4 py-2 mt-0 w-100  d-flex justify-content-between align-items-center' key={index}>
                   <label className='w-100'><Input className='m-1' type='radio' name="Department" id="lead" value={`${val.leadName}`} 
                     onChange={(e) => handlerEscalation("teamLeader",e.target.value)} checked={escalation.teamLeader === `${val.leadName}`}></Input>{val.leadName}</label>
-                     <i class="bi bi-x-octagon"style={{fontSize:'20px',cursor:'pointer'}} onClick={() => handlerDel(val._id)}></i>
+                     {user.role === 'admin' && <i class="bi bi-x-octagon"style={{fontSize:'20px',cursor:'pointer'}} onClick={() => handlerDel(val._id)}></i>}
                      <br />
                 </form>
               ))}

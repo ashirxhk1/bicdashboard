@@ -7,7 +7,7 @@ const cookie = new Cookies()
 const App = () => {
   const navigate = useNavigate()
   const routing = useRoutes(Themeroutes);
-  let token = cookie.get('token')
+  let token = cookie.get('bictoken')
   useEffect(() => {
     if(token){
       navigate('/bi/profile')
