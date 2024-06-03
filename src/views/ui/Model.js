@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import { LeadRegister } from '../../features/userApis';
 const Models= () => {
   const [modal, setModal] = useState(false);
-  const [credential,setCredential] = useState({email:'',password:'',role:'user'})
+  const [credential,setCredential] = useState({email:'',password:'',role:'user',name:''})
   const toggle = () => setModal(!modal);
   const handleChange = (name,value) => {
     setCredential((pre) => ({
@@ -14,7 +14,7 @@ const Models= () => {
 
   const handlerRegister = async () => {
     const {data} = await LeadRegister(credential)
-    if(credential.email.trim() ==='' || credential.password.trim() === ''){
+    if(credential.email.trim() ==='' || credential.password.trim() === '' || credential.name.trim() === ''){
       alert("field required to fill!")
       return
     } 
@@ -35,11 +35,22 @@ const Models= () => {
         <ModalBody>
         <Form>
               <FormGroup>
+                <Label for="username">Name</Label>
+                <Input
+                  id="username"
+                  name="name"
+                  placeholder="Enter name"
+                  type="name"
+                  value={credential.name}
+                  onChange={(e) => handleChange('name',e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
                 <Label for="useremail">Email</Label>
                 <Input
                   id="useremail"
                   name="email"
-                  placeholder="Enter Lead email"
+                  placeholder="Enter email"
                   type="email"
                   value={credential.email}
                   onChange={(e) => handleChange('email',e.target.value)}
@@ -50,7 +61,7 @@ const Models= () => {
                 <Input
                   id="userpass"
                   name="password"
-                  placeholder="Enter Lead Paaword"
+                  placeholder="Enter Password"
                   type="password"
                   value={credential.password}
                   onChange={(e) => handleChange('password',e.target.value)}

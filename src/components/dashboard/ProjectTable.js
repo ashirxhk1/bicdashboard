@@ -59,7 +59,7 @@ const ProjectTables = () => {
     getallUsers()
   },[])
 
-  console.log(userDetails);
+  // console.log(userDetails);
 
   return (
     <div>
@@ -73,7 +73,7 @@ const ProjectTables = () => {
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
-                <th>Team Lead</th>
+                <th>Name</th>
                 <th>Rating</th>
               </tr>
             </thead>
@@ -89,7 +89,7 @@ const ProjectTables = () => {
                     <div className="d-flex align-items-center p-2">
                       <div>
                         {/* <h6 className="mb-0">{tdata.name}</h6> */}
-                        <span className="text-muted">{tdata.email}</span>
+                        <span className="text-muted">{tdata.name}</span>
                       </div>
                     </div>
                   </td>
