@@ -4,7 +4,7 @@ const cookie = new Cookies()
 
 const Auth = ({children}) => {
     const nav = useNavigate()
-    let token = cookie.get('token')
+    let token = cookie.get('bictoken')
     if(token){
         return token ? children : nav('/login')
     }

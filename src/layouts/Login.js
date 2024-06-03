@@ -15,11 +15,12 @@ import {
 import Cookies from "universal-cookie";
 import { Button } from "reactstrap";
 const cookie = new Cookies();
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const nav = useNavigate();
 
+  const nav = useNavigate();
   async function clii() {
     if(email.trim() === '' || password.trim() === ''){
       alert('please fill fields')
@@ -27,13 +28,12 @@ function Login() {
     }else{
       let data = { email, password };
       const res = await LoginApi(data);
-
       if (res.data.success === true) {
         localStorage.setItem(
-          "userData",
-          JSON.stringify({ email: res.data.user.email, id: res.data.user._id })
+          "bicuserData",
+          JSON.stringify({ email: res.data.user.email, id: res.data.user._id,role: res.data.user.role })
         );
-        cookie.set("token", res.data.token);
+        cookie.set("bictoken", res.data.token);
         nav("bi/profile");
       }
     }

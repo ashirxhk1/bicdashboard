@@ -20,6 +20,7 @@ import user2 from "../assets/images/users/user2.jpg";
 const cookie = new Cookies();
 const Header = () => {
   const nav = useNavigate();
+  const user = JSON.parse(localStorage.getItem('bicuserData'))
   const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
@@ -71,16 +72,16 @@ const Header = () => {
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <Link to="/bi/starter" className="nav-link">
+            <Link to="/bi/profile" className="nav-link">
               Starter
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="nav-link">
+            <Link to="/bi/profile" className="nav-link">
               About
             </Link>
           </NavItem>
-          <UncontrolledDropdown inNavbar nav>
+          {/* <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
               Quality Assurance
             </DropdownToggle>
@@ -90,7 +91,7 @@ const Header = () => {
               <DropdownItem divider />
               <DropdownItem>Reset</DropdownItem>
             </DropdownMenu>
-          </UncontrolledDropdown>
+          </UncontrolledDropdown> */}
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="transparent">
@@ -103,12 +104,9 @@ const Header = () => {
             ></img>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Info</DropdownItem>
-            <DropdownItem>My Account</DropdownItem>
-            <DropdownItem>Edit Profile</DropdownItem>
+            <DropdownItem header>Role: {user.role}</DropdownItem>
+            <DropdownItem>{user.email}</DropdownItem>
             <DropdownItem divider />
-            <DropdownItem>My Balance</DropdownItem>
-            <DropdownItem>Inbox</DropdownItem>
             <DropdownItem onClick={handlerLogout}>Logout</DropdownItem>
           </DropdownMenu>
         </Dropdown>
