@@ -25,7 +25,8 @@ export const escalationApi = async (data) => {
     let token = cookie.get('bictoken')
     const res = await axios.post(`http://localhost:8000/createEscalation`,data,{
         headers:{
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data',
         }
     })
     return res
@@ -54,6 +55,16 @@ export const fetchleaders = async () => {
 export const fetchallusers = async () => {
     let token = cookie.get('bictoken')
     const res = await axios.get(`http://localhost:8000/getallusers`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
+export const fetchuserbyid = async (id) => {
+    let token = cookie.get('bictoken')
+    const res = await axios.get(`http://localhost:8000/fetchuserbyid/${id}`,{
         headers:{
             Authorization: `Bearer ${token}`
         }

@@ -16,7 +16,7 @@ import {
 import Cookies from "universal-cookie";
 import { logoutApi } from "../features/userApis";
 import { ReactComponent as LogoWhite } from "../assets/images/logos/bi2.svg";
-import user2 from "../assets/images/users/user2.jpg";
+import user2 from "../assets/images/users/avatar.jpg";
 const cookie = new Cookies();
 const Header = () => {
   const nav = useNavigate();
@@ -27,8 +27,8 @@ const Header = () => {
   const handlerLogout = async () => {
     const res = await logoutApi();
     if (res.data.success === true) {
-      localStorage.removeItem("userData");
-      cookie.remove("token");
+      localStorage.removeItem("bicuserData");
+      cookie.remove("bictoken");
       nav("/");
     }
   };
@@ -95,7 +95,6 @@ const Header = () => {
         </Nav>
         <Dropdown isOpen={dropdownOpen} toggle={toggle}>
           <DropdownToggle color="transparent">
-            l
             <img
               src={user2}
               alt="profile"

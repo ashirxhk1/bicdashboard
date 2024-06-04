@@ -22,7 +22,9 @@ const EscalationForm = () => {
     escSeverity:'',
     issueIden:'',
     escAction:'',
-    successmaration:''
+    successmaration:'',
+    userrating:'',
+    audio:null
   })
 
   const handlerEscalation = (name,value) => {
@@ -78,6 +80,7 @@ const EscalationForm = () => {
       escalation.leadStatus.trim() === '' ||
       escalation.escSeverity.trim() === '' ||
       escalation.issueIden.trim() === '' ||
+      escalation.userrating.trim() === '' ||
       (escalation.escAction === 'Call' && otherReason.trim() === '') ||
       escalation.successmaration.trim() === ''
     ){
@@ -101,7 +104,9 @@ const EscalationForm = () => {
           escSeverity:'',
           issueIden:'',
           escAction:'',
-          successmaration:''
+          successmaration:'',
+          userrating:'',
+          audio:null
         })
         alert("Successfully Created!")
         navigate("/bi/profile")
@@ -109,6 +114,7 @@ const EscalationForm = () => {
     }
   }
 
+  console.log(escalation);
 
   return (
     <div className='d-flex justify-content-center'>
@@ -184,6 +190,17 @@ const EscalationForm = () => {
     </div>
             </div>
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+              <div className='p-4'>
+                <h3>User Rating</h3>
+                <label><Input className='m-2' type="radio" id="userrate" name="userrate" value="bad" checked={escalation.userrating === 'bad'} 
+                onChange={(e) => handlerEscalation("userrating",e.target.value)} />Bad</label> <br />
+                <label><Input className='m-2' type="radio" id="userrate" name="userrate" value="average" checked={escalation.userrating === 'average'} 
+                onChange={(e) => handlerEscalation("userrating",e.target.value)} />Average</label> <br />
+                <label><Input className='m-2' type="radio" id="userrate" name="userrate" value="good" checked={escalation.userrating === 'good'} 
+                onChange={(e) => handlerEscalation("userrating",e.target.value)} />Good</label> <br />
+              </div>
+            </div>
+            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
       <label><h4>Lead Status</h4>
         <p>What is the parked status of the lead?</p>
@@ -247,7 +264,8 @@ const EscalationForm = () => {
             </div>
     <div class="input-group px-4">
       <h5>Attach relevant recording (call) or transcript (chat).</h5>
-      <label><input type="file" class="form-control" id="inputGroupFile02"/>
+      <label><input type="file" accept="audio/*" name='agentaudio' 
+      class="form-control" id="inputGroupFile02" onChange={(e) => handlerEscalation('audio',e.target.files[0])}/>
   </label>
 </div>
 <div className='p-4'>
