@@ -25,10 +25,10 @@ const AgentProfile = () => {
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <Button className="btn btn-outline-success me-md-2"onClick={Nav}> Evaluation</Button>
                 <Button className="btn btn-outline-danger me-md-2"onClick={Escalation}> Escalation</Button>
-                {user.role === 'admin' && <Model/>}
+                {user?.role === 'admin' && <Model/>}
             </div>
             <div className="w-100">
-                {user.role === 'admin' && <ProjectTables/>}
+                {user?.role === 'admin' && <ProjectTables/>}
             </div>
             {/* <Row>
                 <Col lg='4' md='6' xs='12' className="px-0">

@@ -6,9 +6,9 @@ const Auth = ({children}) => {
     const nav = useNavigate()
     let token = cookie.get('bictoken')
     if(token){
-        return token ? children : nav('/login')
+        return token ? children : nav('/')
     }
-    return nav('/login')
+    return nav('/')
 }
 
 export default Auth
