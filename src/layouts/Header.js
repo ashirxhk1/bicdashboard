@@ -103,8 +103,8 @@ const Header = () => {
             ></img>
           </DropdownToggle>
           <DropdownMenu>
-            <DropdownItem header>Role: {user.role}</DropdownItem>
-            <DropdownItem>{user.email}</DropdownItem>
+            <DropdownItem header>Role: {user?.role}</DropdownItem>
+            <DropdownItem>{user?.email}</DropdownItem>
             <DropdownItem divider />
             <DropdownItem onClick={handlerLogout}>Logout</DropdownItem>
           </DropdownMenu>

@@ -8,16 +8,17 @@ const AgentForm = lazy(() => import("../layouts/AgentForm.jsx"));
 const EscalationForm = lazy(() => import("../layouts/EscalationForm.jsx"));
 const UserDetails = lazy(() => import("../layouts/UserDetails.jsx"))
 
+
 const ThemeRoutes = [
   {
     path: "/bi",
     element: <FullLayout />,
     children: [
       // { path: "/bi/starter", exact: true, element: <Starter /> },
-      {path:"/bi/profile",exact :true,element:(<Auth><AgentProfile/></Auth>)},
-      {path:"/bi/agentform",exact :true,element:(<Auth><AgentForm/></Auth>)},
-      {path:"/bi/escalationform",exact :true,element:<Auth><EscalationForm/></Auth>},
-      {path:"/bi/userdetails/:id",exact:true,element:<Auth><UserDetails/></Auth>}
+      {path:"/bi/profile",exact :true, errorElement: <div>Something went wrong!</div>,element:(<Auth><AgentProfile/></Auth>)},
+      {path:"/bi/agentform",exact :true, errorElement: <div>Something went wrong!</div>,element:(<Auth><AgentForm/></Auth>)},
+      {path:"/bi/escalationform",exact :true, errorElement: <div>Something went wrong!</div>,element:<Auth><EscalationForm/></Auth>},
+      {path:"/bi/userdetails/:id",exact:true, errorElement: <div>Something went wrong!</div>,element:<Auth><UserDetails/></Auth>}
     ],
   },
   {
