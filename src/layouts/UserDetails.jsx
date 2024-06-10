@@ -7,6 +7,41 @@ import { Col,Card,CardTitle,Table,CardBody} from 'reactstrap'
 const UserDetails = () => {
   const param = useParams()
   const [userDetails,setUserDetails] = useState([])
+  const [options, setOptions] = useState({
+    series: [{
+      name: "Ratings",
+  }],
+  options: {
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: {
+        enabled: false
+      }
+    },
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'straight'
+    },
+    title: {
+      text: 'Evaluated User Ratings',
+      align: 'left'
+    },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'],
+        opacity: 0.5
+      },
+    },
+    // xaxis: {
+    //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+    // }
+  },
+
+
+  });
   const getUser = async () => {
     const {data} = await fetchuserbyid(param.id)
     setUserDetails(data)
@@ -16,8 +51,7 @@ const UserDetails = () => {
     getUser()
   },[])
   // console.log(userDetails?.counts);
-    const [usergraph,setUserGraph] = useState( {
-          
+    const [usergraph,setUserGraph] = useState( { 
         series: [ Number(userDetails?.counts?.good), Number(userDetails?.counts?.average), Number(userDetails?.counts?.bad)],
         options: {
           chart: {
@@ -48,7 +82,7 @@ const UserDetails = () => {
       
       
       })
-      useEffect(() => {
+    useEffect(() => {
         if (userDetails?.counts) {
           setUserGraph((pre) => ({
             ...pre,
@@ -74,18 +108,35 @@ const UserDetails = () => {
               }
             },
           }));
+          const userRating = userDetails?.user?.evaluationRating?.map(rating => rating?.rating);
+          // const dates = userDetails?.user?.evaluationRating?.map((_, index) => new Date().getTime() + index * 86400000);
+          // console.log(userRating,dates);
+          setOptions((pre) => ({
+            ...pre,
+            series:[
+              {data:userRating.map((rating) => (rating))}
+            ],
+            // options:{
+            //   ...pre,
+            //   xaxis:{
+            //     categories:dates.map((_,index) => ([dates[index]]))
+            //   }
+            // }
+          }))
         }
-      }, [userDetails]);
+    }, [userDetails]);
+      
   return (
     <div>
-      <ReactApexChart options={usergraph.options} series={usergraph.series} type="radialBar" height={350} />
-      <div>
+      <ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} />
+      <ReactApexChart options={options?.options} series={options?.series} type="area" height={350} />
+      <div style={{overflowX:'scroll'}}>
       <Col lg="12">
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
             User : {userDetails?.user?.name}
           </CardTitle>
-          <CardBody className="">
+          <CardBody>
             <Table bordered>
               <thead>
                 <tr>
@@ -106,8 +157,8 @@ const UserDetails = () => {
                 </tr>
               </thead>
               <tbody style={{overflowX:'scroll'}}>
-                {userDetails?.user?.escalationdetail.map((val,index) => {
-                  var url = val?.audio.replace(/\\/g, "/");
+                {userDetails?.user?.escalationdetail?.map((val,index) => {
+                  var url = val?.audio?.replace(/\\/g, "/");
                   return(
                   <tr style={{overflowX:'hidden'}}>
                     <th scope="row">{index+1}</th>
