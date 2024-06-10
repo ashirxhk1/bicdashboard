@@ -74,7 +74,7 @@ const ProjectTables = () => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Rating</th>
+                <th>No of Ratings</th>
               </tr>
             </thead>
             <tbody>

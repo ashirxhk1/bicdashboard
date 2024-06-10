@@ -40,7 +40,7 @@ const Models= () => {
                   id="username"
                   name="name"
                   placeholder="Enter name"
-                  type="name"
+                  type="text"
                   value={credential.name}
                   onChange={(e) => handleChange('name',e.target.value)}
                 />
