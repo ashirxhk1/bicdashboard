@@ -12,15 +12,30 @@ const Models= () => {
     }))
   }
 
-  const handlerRegister = async () => {
-    const {data} = await LeadRegister(credential)
+  const handlerRegister = async (e) => {
+    e.preventDefault();
     if(credential.email.trim() ==='' || credential.password.trim() === '' || credential.name.trim() === ''){
       alert("field required to fill!")
       return
-    } 
-    if(data.success){
-      alert("Team Leader Added!")
-      setCredential({email:'',password:''})
+    }else{ 
+      try{
+        const {data} = await LeadRegister(credential)
+        if(data.success){
+          alert("Team Leader Added!")
+          setCredential({email:'',password:''})
+          toggle()
+        }else {
+          alert('registration failed. Please check your credentials.');
+        }
+      }catch(error){
+        if (error.response) {
+          alert(`Error: ${error.response.data.message || 'An error occurred'}`);
+        } else if (error.request) {
+          alert('No response received from the server. Please try again later.');
+        } else {
+          alert('An error occurred. Please try again later.');
+        }
+      }
     }
   }
 
@@ -33,7 +48,7 @@ const Models= () => {
       <Modal isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add user</ModalHeader>
         <ModalBody>
-        <Form>
+        <Form onSubmit={handlerRegister}>
               <FormGroup>
                 <Label for="username">Name</Label>
                 <Input
@@ -67,19 +82,17 @@ const Models= () => {
                   onChange={(e) => handleChange('password',e.target.value)}
                 />
               </FormGroup>
-              </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={() => {
-            handlerRegister()
-            toggle()
-          }}>
+              <ModalFooter>
+          <Button color="primary" type='submit'>
             Submit
           </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             Cancel
           </Button>
         </ModalFooter>
+              </Form>
+        </ModalBody>
+        
       </Modal>
     </div>
   );
