@@ -7,6 +7,7 @@ import { Col,Card,CardTitle,Table,CardBody} from 'reactstrap'
 const UserDetails = () => {
   const param = useParams()
   const [userDetails,setUserDetails] = useState([])
+  const [audioUrls, setAudioUrls] = useState([]);
   const [options, setOptions] = useState({
     series: [{
       name: "Ratings",
@@ -116,22 +117,33 @@ const UserDetails = () => {
             series:[
               {data:userRating.map((rating) => (rating))}
             ],
-            // options:{
-            //   ...pre,
-            //   xaxis:{
-            //     categories:dates.map((_,index) => ([dates[index]]))
-            //   }
-            // }
           }))
         }
+        if(userDetails?.user?.escalationdetail){
+          const fetchAudioUrls = async () => {
+            const urls = await Promise.all(
+              userDetails.user.escalationdetail.map(async (val) => {
+                var url = val?.audio?.replace("uploads\\", "");
+                const response = await fetch(`http://localhost:8000/${url}`);
+                if (response) {
+                  return response?.url;
+                } else {
+                  return null;
+                }
+              })
+            );
+            setAudioUrls(urls);
+          };
+          fetchAudioUrls();
+        }
     }, [userDetails]);
-      
+
   return (
     <div>
       <ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} />
       <ReactApexChart options={options?.options} series={options?.series} type="area" height={350} />
       <div style={{overflowX:'scroll'}}>
-      <Col lg="12">
+      <Col lg="12" style={{width:'max-content'}}>
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
             User : {userDetails?.user?.name}
@@ -158,9 +170,8 @@ const UserDetails = () => {
               </thead>
               <tbody style={{overflowX:'scroll'}}>
                 {userDetails?.user?.escalationdetail?.map((val,index) => {
-                  var url = val?.audio?.replace(/\\/g, "/");
                   return(
-                  <tr style={{overflowX:'hidden'}}>
+                  <tr style={{overflowX:'hidden'}} key={index}>
                     <th scope="row">{index+1}</th>
                     <td>{val?.useremail}</td>
                     <td>{val?.leadID}</td>
@@ -175,9 +186,13 @@ const UserDetails = () => {
                     <td>{val?.escalationaction}</td>
                     <td>{val?.additionalsuccessrmation}</td>
                     <td>
-                      <audio controls>
-                          <source src={`http://localhost:8000/${url}`} type="audio/mpeg" />
-                      </audio>
+                      {audioUrls[index] ? (
+                          <audio controls>
+                            <source src={audioUrls[index]} type="audio/mpeg" />
+                          </audio>
+                        ) : (
+                          'Loading...'
+                        )}
                     </td>
                   </tr>
                 )})}

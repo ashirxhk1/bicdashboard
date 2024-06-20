@@ -21,24 +21,40 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const nav = useNavigate();
-  async function clii() {
-    if(email.trim() === '' || password.trim() === ''){
-      alert('please fill fields')
-      return
-    }else{
+  async function clii(e) {
+    e.preventDefault();
+    
+    if (email.trim() === '' || password.trim() === '') {
+      alert('Please fill in all fields');
+      return;
+    } else {
       let data = { email, password };
-      const res = await LoginApi(data);
-      if (res.data.success === true) {
-        localStorage.setItem(
-          "bicuserData",
-          JSON.stringify({ email: res.data.user.email, id: res.data.user._id,role: res.data.user.role })
-        );
-        cookie.set("bictoken", res.data.token);
-        nav("bi/profile");
+      
+      try {
+        const res = await LoginApi(data);
+        
+        if (res.status === 200 && res.data.success === true) {
+          localStorage.setItem(
+            "bicuserData",
+            JSON.stringify({ email: res.data.user.email, id: res.data.user._id, role: res.data.user.role })
+          );
+          cookie.set("bictoken", res.data.token);
+          nav("bi/profile");
+        } else {
+          alert('Login failed. Please check your credentials.');
+        }
+      } catch (error) {
+        if (error.response) {
+          alert(`Error: ${error.response.data.message || 'An error occurred'}`);
+        } else if (error.request) {
+          alert('No response received from the server. Please try again later.');
+        } else {
+          alert('An error occurred. Please try again later.');
+        }
       }
     }
-    // nav('bi/profile')
   }
+  
 
   return (
     <MDBContainer
@@ -78,36 +94,37 @@ function Login() {
 
           <MDBCard className="my-5 bg-glass w-75">
             <MDBCardBody className="p-5">
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Email"
-                id="form3"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <MDBInput
-                wrapperClass="mb-4"
-                label="Password"
-                id="form4"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-
-              <div className="d-flex justify-content-start mb-4">
-                <MDBCheckbox
-                  name="flexCheck"
-                  value=""
-                  id="flexCheckDefault"
-                  label="Remember me"
+              <form onSubmit={clii}>
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Email"
+                  id="form3"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-              </div>
+                <MDBInput
+                  wrapperClass="mb-4"
+                  label="Password"
+                  id="form4"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
 
-              <Button className="w-100 signupBtn" onClick={clii}>
-                Sign-in
-              </Button>
+                <div className="d-flex justify-content-start mb-4">
+                  <MDBCheckbox
+                    name="flexCheck"
+                    value=""
+                    id="flexCheckDefault"
+                    label="Remember me"
+                  />
+                </div>
 
+                <Button className="w-100 signupBtn" type="submit">
+                  Sign-in
+                </Button>
+              </form>
               <div className="text-center">
                 <MDBBtn
                   tag="a"

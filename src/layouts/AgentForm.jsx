@@ -102,47 +102,46 @@ const AgentForm = () => {
             <p>COMMUNICATION</p>
         </div>
         <div className='bg-warning rounded d-flex justify-content-center flex-column '>
-<div className='d-flex flex-start p-4'>
-  <label>Enter your email: <br />
-    <Input type="email" placeholder="Enter Your Email Here" value={evaluation.email}
-     onChange={(e) => handlerChangeEvl('email',e.target.value)} />
-  </label>
-</div>
-
+          <div className='d-flex flex-start p-4'>
+            <label>Enter your email: <br />
+              <Input type="email" placeholder="Enter Your Email Here" value={evaluation.email}
+              onChange={(e) => handlerChangeEvl('email',e.target.value)} />
+            </label>
+          </div>
         </div>
         <div className='bg-warning rounded d-flex justify-content-center flex-column'>
-        <div className='d-flex flex-start p-4'>
-  <label>lead ID: <br />
-    <Input type="text" placeholder="Enter Your Lead ID Here" value={evaluation.leadId} 
-     onChange={(e) => handlerChangeEvl('leadId',e.target.value)}/>
-  </label>
-</div>
+          <div className='d-flex flex-start p-4'>
+            <label>lead ID: <br />
+              <Input type="text" placeholder="Enter Your Lead ID Here" value={evaluation.leadId} 
+              onChange={(e) => handlerChangeEvl('leadId',e.target.value)}/>
+            </label>
+          </div>
         </div>
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
-            <div className='d-flex flex-start p-4'>
-      <label>Agent Name: <br />
-        <Input type="text" placeholder="Enter Agent Name Here" value={evaluation.agentName}
-          onChange={(e) => handlerChangeEvl('agentName',e.target.value)}/>
-      </label>
-    </div>
+              <div className='d-flex flex-start p-4'>
+                <label>Agent Name: <br />
+                  <Input type="text" placeholder="Enter Agent Name Here" value={evaluation.agentName}
+                    onChange={(e) => handlerChangeEvl('agentName',e.target.value)}/>
+                </label>
+              </div>
             </div>
             <div className='bg-warning rounded d-flex justify-content-center flex-column'>
-            <div className='d-flex flex-start p-4'>
-              <label>Team Leader: <br />
-                <Input className='border-none' type="text" placeholder="Enter Your Name Here" value={evaluation.teamleader} 
-                  onChange={(e) => handlerChangeEvl('teamleader',e.target.value)} />
-              </label>
-            </div>
+              <div className='d-flex flex-start p-4'>
+                <label>Team Leader: <br />
+                  <Input className='border-none' type="text" placeholder="Enter Your Name Here" value={evaluation.teamleader} 
+                    onChange={(e) => handlerChangeEvl('teamleader',e.target.value)} />
+                </label>
+              </div>
             </div>
         <div className='bg-warning rounded d-flex justify-content-center flex-column'>
           <h3 className='p-4'>Mode of Communication</h3>
-        <form class='bg-gray px-4'>
-      <label className='d-flex align-items-center gap-2'><Input className='m-1' type='radio' name="Communication" value="Chat" checked={evaluation.mod==='Chat'} 
-        onChange={(e) => handlerChangeEvl('mod',e.target.value)} defaultChecked/>Chat</label><br />
-      <label className='d-flex align-items-center gap-2'><Input className='m-1' type='radio' name="Communication" value="Call"checked={evaluation.mod==='Call'}
-        onChange={(e) => handlerChangeEvl('mod',e.target.value)}/>Call</label><br />
-      <br/>
-  </form>
+          <div class='bg-gray px-4'>
+            <label className='d-flex align-items-center gap-2'><Input className='m-1' type='radio' name="Communication" value="Chat" checked={evaluation.mod==='Chat'} 
+              onChange={(e) => handlerChangeEvl('mod',e.target.value)} defaultChecked/>Chat</label><br />
+            <label className='d-flex align-items-center gap-2'><Input className='m-1' type='radio' name="Communication" value="Call"checked={evaluation.mod==='Call'}
+              onChange={(e) => handlerChangeEvl('mod',e.target.value)}/>Call</label><br />
+            <br/>
+          </div>
         </div>
             {/* <div className='bg-warning rounded d-flex justify-content-center flex-column'>
               <h3 className='p-4'>Select The Team</h3>
@@ -264,19 +263,19 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
 
         <div className='bg-warning rounded d-flex justify-content-center flex-column'>
         <div className='d-flex flex-start p-4'>
-  <label><h4>Evaluation Summary</h4>
-    <p>What areas need improvement in the call?</p>
-    <p>What did the agent overlook?</p>
-    <label for="evaluationsummary">Other</label>
-    <textarea class="form-control mt-1" id="evaluationsummary" placeholder='Your Answer' rows="3" value={evaluation.evaluationsummary}
+    <label><h4>Evaluation Summary</h4>
+      <p>What areas need improvement in the call?</p>
+      <p>What did the agent overlook?</p>
+      <label for="evaluationsummary">Other</label>
+      <textarea class="form-control mt-1" id="evaluationsummary" placeholder='Your Answer' rows="3" value={evaluation.evaluationsummary}
       onChange={(e) => handlerChangeEvl('evaluationsummary',e.target.value)}></textarea>
-  </label>
-</div>
+    </label>
+  </div>
         </div>
        
-<div className='p-4'>
-<button type="button" class="btn btn-outline-success btn-lg" onClick={handlerEscForm}>Submit</button>
-</div>
+      <div className='p-4'>
+        <button type="button" class="btn btn-outline-success btn-lg" onClick={handlerEscForm}>Submit</button>
+      </div>
     </div>
 </div>
  )
