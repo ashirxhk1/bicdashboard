@@ -74,11 +74,8 @@ function Login() {
             <span style={{ color: "hsl(218, 81%, 75%)" }}>Communication</span>
           </h1>
 
-          <p className="px-3" style={{ color: "hsl(218, 81%, 85%)" }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-            itaque accusantium odio, soluta, corrupti aliquam quibusdam tempora
-            at cupiditate quis eum maiores libero veritatis? Dicta facilis sint
-            aliquid ipsum atque?
+          <p className="px-4" style={{ color: "hsl(60, 100%, 100%)" }}>
+          Welcome to <b>Bright Ideas Communications</b>, where innovation meets excellence in IT solutions. With a passion for cutting-edge technology and a commitment to client success, we deliver bespoke strategies and seamless execution to drive your business forward. Explore our comprehensive suite of services designed to elevate your digital presence and maximize efficiency. Discover why Bright Ideas Communications is your trusted partner in navigating the evolving landscape of technology.
           </p>
         </MDBCol>
 
