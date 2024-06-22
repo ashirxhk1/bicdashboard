@@ -74,8 +74,8 @@ function Login() {
             <span style={{ color: "hsl(218, 81%, 75%)" }}>Communication</span>
           </h1>
 
-          <p className="px-4" style={{ color: "hsl(60, 100%, 100%)" }}>
-          Welcome to <b>Bright Ideas Communications</b>, where innovation meets excellence in IT solutions. With a passion for cutting-edge technology and a commitment to client success, we deliver bespoke strategies and seamless execution to drive your business forward. Explore our comprehensive suite of services designed to elevate your digital presence and maximize efficiency. Discover why Bright Ideas Communications is your trusted partner in navigating the evolving landscape of technology.
+          <p className="px-4" style={{ color: "hsl(0, 0%, 100%)" }}>
+          <b>Welcome to Bright Ideas Communications, where innovation meets excellence in IT solutions. With a passion for cutting-edge technology and a commitment to client success, we deliver bespoke strategies and seamless execution to drive your business forward. Explore our comprehensive suite of services designed to elevate your digital presence and maximize efficiency. Discover why Bright Ideas Communications is your trusted partner in navigating the evolving landscape of technology.</b>
           </p>
         </MDBCol>
 
@@ -89,7 +89,7 @@ function Login() {
             className="position-absolute shadow-5-strong"
           ></div>
 
-          <MDBCard className="my-5 bg-glass w-75">
+          <MDBCard className="my-5 bg-primary bg-gradient w-75">
             <MDBCardBody className="p-5">
               <form onSubmit={clii}>
                 <MDBInput

@@ -98,10 +98,10 @@ const AgentForm = () => {
     <div className='d-flex justify-content-center'>
     <div className='w-50 bg-gray d-flex flex-column gap-3'>
         <div className='bg-light rounded d-flex justify-content-center flex-column align-items-center'>
-            <h1 className='fw-bolder'>BRIGHT IDEA'S</h1>
-            <p>COMMUNICATION</p>
+            <h1 className='fw-bolder'>BI COM</h1>
+            <h3 className='text-success'>Evaluation Form</h3>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column '>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column '>
           <div className='d-flex flex-start p-4'>
             <label>Enter your email: <br />
               <Input type="email" placeholder="Enter Your Email Here" value={evaluation.email}
@@ -109,7 +109,7 @@ const AgentForm = () => {
             </label>
           </div>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
           <div className='d-flex flex-start p-4'>
             <label>lead ID: <br />
               <Input type="text" placeholder="Enter Your Lead ID Here" value={evaluation.leadId} 
@@ -117,7 +117,7 @@ const AgentForm = () => {
             </label>
           </div>
         </div>
-            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+            <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
               <div className='d-flex flex-start p-4'>
                 <label>Agent Name: <br />
                   <Input type="text" placeholder="Enter Agent Name Here" value={evaluation.agentName}
@@ -125,7 +125,7 @@ const AgentForm = () => {
                 </label>
               </div>
             </div>
-            <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+            <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
               <div className='d-flex flex-start p-4'>
                 <label>Team Leader: <br />
                   <Input className='border-none' type="text" placeholder="Enter Your Name Here" value={evaluation.teamleader} 
@@ -133,7 +133,7 @@ const AgentForm = () => {
                 </label>
               </div>
             </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
           <h3 className='p-4'>Mode of Communication</h3>
           <div class='bg-gray px-4'>
             <label className='d-flex align-items-center gap-2'><Input className='m-1' type='radio' name="Communication" value="Chat" checked={evaluation.mod==='Chat'} 
@@ -143,7 +143,7 @@ const AgentForm = () => {
             <br/>
           </div>
         </div>
-            {/* <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+            {/* <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
               <h3 className='p-4'>Select The Team</h3>
               <form class='bg-gray p-4'>
                 <label><Input className='m-1' type='radio' name="Team" value="ERC Dubai" defaultChecked
@@ -158,7 +158,7 @@ const AgentForm = () => {
                 <br/>
               </form>
             </div> */}
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className='p-4'>    
           <h3>Greetings</h3>
           <p>Demonstrates enthusiasm and a positive tone throughout the call.</p>
@@ -174,7 +174,7 @@ const AgentForm = () => {
                 }} />Not upto the mark</label> <br />
         </div>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className=' p-4'>    
           <h3>Accuracy & Compliance</h3>
           <p>Provides accurate and up-to-date secondaryrmation about the company's products or services, adhering to all relevant scripts and policies.</p>
@@ -190,7 +190,7 @@ const AgentForm = () => {
     }} />Not upto the mark</label> <br />
 </div>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className=' p-4'>    
           <h3>Building Rapport & Discovery</h3>
           <p>Identifies potential pain points or opportunities where the product/service can provide value to the customer.</p>
@@ -206,7 +206,7 @@ const AgentForm = () => {
   }} checked={evaluation.building==='mark'} />Not upto the mark</label> <br />
 </div>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className=' p-4'>    
           <h3>Presenting Solutions & Making the Sale</h3>
           <p>Clearly and concisely presents the product/service features and benefits tailored to the customer's needs identified earlier.</p>
@@ -222,7 +222,7 @@ const AgentForm = () => {
       }}/>Not upto the mark</label> <br />
 </div>
         </div>
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className=' p-4'>    
           <h3>Call Closing & Securing Commitment</h3>
           <p>Confirms the customer's details and secures their commitment for the sale or appointment. Thanks the customer for their time and offers further assistance if needed.</p>
@@ -238,7 +238,7 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
   }}/>Not upto the mark</label> <br />
 </div>
         </div>
-      <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+      <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className=' p-4'>    
             <h3>Bonus Point</h3>
             <label className='d-flex align-items-center gap-2'><Input className='m-2' style={{width:'28px'}} 
@@ -261,7 +261,7 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
       </div>
 
 
-        <div className='bg-warning rounded d-flex justify-content-center flex-column'>
+        <div className='bg-light bg-gradient rounded d-flex justify-content-center flex-column'>
         <div className='d-flex flex-start p-4'>
     <label><h4>Evaluation Summary</h4>
       <p>What areas need improvement in the call?</p>
