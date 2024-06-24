@@ -124,7 +124,7 @@ const UserDetails = () => {
             const urls = await Promise.all(
               userDetails.user.escalationdetail.map(async (val) => {
                 var url = val?.audio?.replace("uploads\\", "");
-                const response = await fetch(`http://localhost:8000/api/${url}`);
+                const response = await fetch(`http://localhost:8000/${url}`);
                 if (response) {
                   return response?.url;
                 } else {
