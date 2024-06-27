@@ -11,6 +11,7 @@ const App = () => {
   useEffect(() => {
     if(token){
       navigate('/bi/profile')
+      window.location.reload();
     }
   },[])
 
