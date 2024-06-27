@@ -48,6 +48,7 @@ const ProjectTables = () => {
   const navigate = useNavigate();
   const handlerProfile = (id) => {
     navigate(`/bi/userdetails/${id}`);
+    window.location.reload();
     // toggleSidebar();
   };
   const getallUsers = async () => {
