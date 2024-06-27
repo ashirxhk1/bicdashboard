@@ -34,6 +34,11 @@ const Header = () => {
     }
   };
 
+  const handlernav = () => {
+      nav('/bi/profile')
+      window.location.reload();
+  }  
+  
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
     setIsOpen(!isOpen);
@@ -73,14 +78,14 @@ const Header = () => {
       <Collapse navbar isOpen={isOpen}>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <Link to="/bi/profile" className="nav-link">
+            <div className="nav-link" onClick={handlernav}>
               Starter
-            </Link>
+            </div>
           </NavItem>
           <NavItem>
-            <Link to="/bi/profile" className="nav-link">
+            <div className="nav-link" onClick={handlernav}>
               About
-            </Link>
+            </div>
           </NavItem>
           {/* <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
