@@ -1,20 +1,20 @@
 import axios from "axios"
 import Cookies from "universal-cookie"
 const cookie = new Cookies
-
+const baseUrl = 'https://backendbic.onrender.com'
 export const LoginApi = async (data) => {
-    const res = await axios.post(`http://localhost:8000/login`,data)
+    const res = await axios.post(`${baseUrl}/login`,data)
     return res
 }
 
 export const LeadRegister = async (data) => {
-    const res = await axios.post(`http://localhost:8000/register`,data)
+    const res = await axios.post(`${baseUrl}/register`,data)
     return res
 }
 
 export const logoutApi = async () => {
     let token = cookie.get('bictoken')
-    const res = await axios.get(`http://localhost:8000/logout`,{
+    const res = await axios.get(`${baseUrl}/logout`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -23,7 +23,7 @@ export const logoutApi = async () => {
 }
 export const escalationApi = async (data) => {
     let token = cookie.get('bictoken')
-    const res = await axios.post(`http://localhost:8000/createEscalation`,data,{
+    const res = await axios.post(`${baseUrl}0/createEscalation`,data,{
         headers:{
             Authorization: `Bearer ${token}`,
             'Content-Type': 'multipart/form-data',
@@ -34,7 +34,7 @@ export const escalationApi = async (data) => {
 
 export const evaluationApi = async (data) => {
     let token = cookie.get('bictoken')
-    const res = await axios.post(`http://localhost:8000/createEvaluation`,data,{
+    const res = await axios.post(`${baseUrl}/createEvaluation`,data,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -44,7 +44,7 @@ export const evaluationApi = async (data) => {
 
 export const fetchleaders = async () => {
     let token = cookie.get('bictoken')
-    const res = await axios.get(`http://localhost:8000/fetchleaders`,{
+    const res = await axios.get(`${baseUrl}/fetchleaders`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -54,7 +54,7 @@ export const fetchleaders = async () => {
 
 export const fetchallusers = async () => {
     let token = cookie.get('bictoken')
-    const res = await axios.get(`http://localhost:8000/getallusers`,{
+    const res = await axios.get(`${baseUrl}/getallusers`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -64,7 +64,7 @@ export const fetchallusers = async () => {
 
 export const fetchuserbyid = async (id) => {
     let token = cookie.get('bictoken')
-    const res = await axios.get(`http://localhost:8000/fetchuserbyid/${id}`,{
+    const res = await axios.get(`${baseUrl}/fetchuserbyid/${id}`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -74,7 +74,7 @@ export const fetchuserbyid = async (id) => {
 
 export const createteamLeaders = async (data) => {
     let token = cookie.get('bictoken')
-    const res = await axios.post(`http://localhost:8000/createteamLeaders`,data,{
+    const res = await axios.post(`${baseUrl}/createteamLeaders`,data,{
         headers:{
             Authorization: `Bearer ${token}`
         }
@@ -84,7 +84,7 @@ export const createteamLeaders = async (data) => {
 
 export const leaddelete = async (id) => {
     let token = cookie.get('bictoken')
-    const res = await axios.delete(`http://localhost:8000/leaddelete/${id}`,{
+    const res = await axios.delete(`${baseUrl}/leaddelete/${id}`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
