@@ -14,9 +14,11 @@ const AgentProfile = () => {
     
     const Nav = () =>{
         Navigation('/bi/agentform')
+        window.location.reload();
     }
     const Escalation = () =>{
         Navigation('/bi/escalationform')
+        window.location.reload();
     }
    
     return (
