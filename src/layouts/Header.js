@@ -30,6 +30,7 @@ const Header = () => {
       localStorage.removeItem("bicuserData");
       cookie.remove("bictoken");
       nav("/");
+      window.location.reload();
     }
   };
 
