@@ -40,6 +40,7 @@ function Login() {
           );
           cookie.set("bictoken", res.data.token);
           nav("bi/profile");
+          window.location.reload();
         } else {
           alert('Login failed. Please check your credentials.');
         }
