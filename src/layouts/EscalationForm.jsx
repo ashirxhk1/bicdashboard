@@ -110,6 +110,7 @@ const EscalationForm = () => {
         })
         alert("Successfully Created!")
         navigate("/bi/profile")
+        window.location.reload();
       }
     }
   }
