@@ -13,7 +13,7 @@ const App = () => {
       navigate('/bi/profile')
       window.location.reload();
     }
-  },[token,navigate])
+  },[])
 
   return <div className="dark">{routing}</div>;
 };
