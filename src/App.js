@@ -8,12 +8,12 @@ const App = () => {
   const navigate = useNavigate()
   const routing = useRoutes(Themeroutes);
   let token = cookie.get('bictoken')
-  useEffect(() => {
-    if(token){
-      navigate('/bi/profile')
-      // window.location.reload();
-    }
-  },[])
+  // useEffect(() => {
+  //   if(token){
+  //     navigate('/bi/profile')
+  //     // window.location.reload();
+  //   }
+  // },[])
 
   return <div className="dark">{routing}</div>;
 };
