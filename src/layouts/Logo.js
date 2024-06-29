@@ -1,11 +1,15 @@
 import { ReactComponent as LogoDark } from "../assets/images/logos/bi3.svg";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Logo = () => {
+  const navigation = useNavigate()
+  const homeNavigator = () => {
+    navigation('/bi/profile')
+  }
   return (
-    <Link to="/">
+    <div onClick={() => homeNavigator()}>
       <LogoDark />
-    </Link>
+    </div>
   );
 };
 

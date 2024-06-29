@@ -12,23 +12,23 @@ const AgentProfile = () => {
     const Navigation = useNavigate()
     const user = JSON.parse(localStorage.getItem('bicuserData'))
     
-    const Nav = () =>{
-        Navigation('/bi/agentform')
-        window.location.reload();
-    }
-    const Escalation = () =>{
-        Navigation('/bi/escalationform')
-        window.location.reload();
-    }
+    // const Nav = () =>{
+    //     Navigation('/bi/agentform')
+    //     window.location.reload();
+    // }
+    // const Escalation = () =>{
+    //     Navigation('/bi/escalationform')
+    //     window.location.reload();
+    // }
    
     return (
         // <Container>
         <div className="d-flex flex-column gap-5 justify-content-center align-items-center">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            {/* <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <Button className="btn btn-outline-success me-md-2"onClick={Nav}> Evaluation</Button>
                 <Button className="btn btn-outline-danger me-md-2"onClick={Escalation}> Escalation</Button>
                 {user?.role === 'admin' && <Model/>}
-            </div>
+            </div> */}
             <div className="w-100">
                 {user?.role === 'admin' && <ProjectTables/>}
             </div>

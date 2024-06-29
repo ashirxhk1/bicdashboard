@@ -51,4 +51,9 @@
 .radioIn{
   width:21px;
 }
-
+.navbar{
+  background-color: #1b1b29 !important;
+}
+.bg-card-color{
+  background-color: #fff !important;
+}

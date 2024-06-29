@@ -34,10 +34,10 @@ const Header = () => {
     }
   };
 
-  const handlernav = () => {
-      nav('/bi/profile')
-      window.location.reload();
-  }  
+  // const handlernav = () => {
+  //     nav('/bi/profile')
+  //     window.location.reload();
+  // }  
   
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   const Handletoggle = () => {
@@ -47,7 +47,7 @@ const Header = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
   return (
-    <Navbar color="light" font="dark" expand="md" className="bg-gradient">
+    <Navbar color="light" font="dark" expand="md" >
       <div className="d-flex align-items-center">
         <NavbarBrand href="/" className="d-lg-none">
           <LogoWhite />
@@ -75,9 +75,9 @@ const Header = () => {
         </Button>
       </div>
 
-      <Collapse navbar isOpen={isOpen}>
+      <Collapse navbar isOpen={isOpen} style={{backgroundColor:'#1B1B29 !important'}}>
         <Nav className="me-auto" navbar>
-          <NavItem>
+          {/* <NavItem>
             <div className="nav-link" onClick={handlernav}>
               Starter
             </div>
@@ -86,7 +86,7 @@ const Header = () => {
             <div className="nav-link" onClick={handlernav}>
               About
             </div>
-          </NavItem>
+          </NavItem> */}
           {/* <UncontrolledDropdown inNavbar nav>
             <DropdownToggle caret nav>
               Quality Assurance

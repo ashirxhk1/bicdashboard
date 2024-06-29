@@ -1,6 +1,8 @@
 import { Button, Nav, NavItem } from "reactstrap";
 import Logo from "./Logo";
-import { Link, useLocation } from "react-router-dom";
+import { lazy } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+const Model = lazy(() => import('../views/ui/Model.js'))
 
 const navigation = [
   {
@@ -16,13 +18,22 @@ const navigation = [
 ];
 
 const Sidebar = () => {
+  const Navigation = useNavigate()
+  const user = JSON.parse(localStorage.getItem('bicuserData'))
   const showMobilemenu = () => {
     document.getElementById("sidebarArea").classList.toggle("showSidebar");
   };
-  let location = useLocation();
-
+  // let location = useLocation();
+  const navigateToEvaluation  = () =>{
+    Navigation('/bi/agentform')
+    window.location.reload();
+  }
+  const navigateToEscalation  = () =>{
+    Navigation('/bi/escalationform')
+    window.location.reload();
+  }
   return (
-    <div className="p-3">
+    <div className="p-3 position-fixed" style={{width:'260px'}}>
       <div className="d-flex align-items-center">
         <Logo />
         <span className="ms-auto d-lg-none">
@@ -35,8 +46,13 @@ const Sidebar = () => {
         </span>
       </div>
       <div className="pt-4 mt-2">
-        <Nav vertical className="sidebarNav">
-          {navigation.map((navi, index) => (
+        <Nav vertical className="sidebarNav gap-3">
+            {/* <div class="d-grid gap-2 d-md-flex justify-content-md-end"> */}
+                <NavItem className="btn btn-outline-success" onClick={() => navigateToEvaluation()}> Evaluation</NavItem>
+                <NavItem className="btn btn-outline-danger" onClick={() => navigateToEscalation()}> Escalation</NavItem>
+                {user?.role === 'admin' && <Model/>}
+            {/* </div> */}
+          {/* {navigation.map((navi, index) => (
             <NavItem key={index} className="sidenav-bg">
               <Link
                 to={navi.href}
@@ -50,8 +66,7 @@ const Sidebar = () => {
                 <span className="ms-3 d-inline-block">{navi.title}</span>
               </Link>
             </NavItem>
-          ))}
-         
+          ))} */}
         </Nav>
       </div>
     </div>
