@@ -42,7 +42,7 @@ const Models= () => {
 
   return (
     <div>
-      <Button onClick={toggle}>
+      <Button onClick={toggle} className='w-100'>
         Add Team Lead
       </Button>
       <Modal isOpen={modal} toggle={toggle}>
