@@ -4,12 +4,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { escalationApi,fetchleaders,leaddelete } from '../features/userApis'
 import LeadModel from '../views/ui/LeadModel'
 import { useNavigate } from 'react-router-dom';
+import BtnLoader from "./loader/BtnLoader";
 
 const EscalationForm = () => {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem('bicuserData'))
   const [otherReason, setOtherReason] = useState('');
   const [leaders,setLeader] = useState([])
+  const [load,setLoad] = useState(false)
   const [fetchLatestUser,setFetchLatestUser] = useState(false)
   const [escalation,setEscalation] = useState({
     email:'',
@@ -70,6 +72,7 @@ const EscalationForm = () => {
   }
 
   const handlerEscForm = async () => {
+    setLoad(true)
     if(
       escalation.email.trim() === '' ||
       escalation.leadId.trim() === '' ||
@@ -111,11 +114,12 @@ const EscalationForm = () => {
         alert("Successfully Created!")
         navigate("/bi/profile")
         window.location.reload();
+        setLoad(false)
       }
     }
   }
 
-  console.log(escalation);
+
 
   return (
     <div className='d-flex justify-content-center'>
@@ -269,7 +273,9 @@ const EscalationForm = () => {
   </label>
 </div>
 <div className='p-4'>
-<button type="button" class="btn btn-outline-success btn-lg" onClick={handlerEscForm}>Submit</button>
+<button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" onClick={handlerEscForm} disabled={load}>
+  Submit {load && <BtnLoader/>}
+</button>
 </div>
         </div>
     </div>

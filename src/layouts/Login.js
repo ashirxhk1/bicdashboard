@@ -14,16 +14,18 @@ import {
 } from "mdb-react-ui-kit";
 import Cookies from "universal-cookie";
 import { Button } from "reactstrap";
+import BtnLoader from "./loader/BtnLoader";
 const cookie = new Cookies();
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [load,setLoad] = useState(false)
   const nav = useNavigate();
+
   async function clii(e) {
     e.preventDefault();
-    
+    setLoad(true)
     if (email.trim() === '' || password.trim() === '') {
       alert('Please fill in all fields');
       return;
@@ -41,6 +43,7 @@ function Login() {
           cookie.set("bictoken", res.data.token);
           nav("bi/profile");
           window.location.reload();
+          setLoad(false)
         } else {
           alert('Login failed. Please check your credentials.');
         }
@@ -119,8 +122,8 @@ function Login() {
                   />
                 </div>
 
-                <Button className="w-100 signupBtn" type="submit">
-                  Sign-in
+                <Button className="w-100 signupBtn d-flex gap-2 justify-content-center align-content-center" type="submit" disabled={load}> 
+                  Sign-in {load && <BtnLoader/>}
                 </Button>
               </form>
               <div className="text-center">

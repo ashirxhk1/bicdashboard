@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Input } from 'reactstrap'
 import { evaluationApi } from '../features/userApis'
 import {useNavigate} from 'react-router-dom'
+import BtnLoader from './loader/BtnLoader'
+
 const AgentForm = () => {
   const navigate = useNavigate()
+  const [load,setLoad] = useState(false)
   const [userRate,setUseRate] = useState(
     {
       greeting:{rateVal:0},
@@ -51,6 +54,7 @@ const AgentForm = () => {
   },[userRate])
   
   const handlerEscForm = async () => {
+    setLoad(true)
     if(
       evaluation.email.trim() === '' ||
       evaluation.leadId.trim() === '' ||
@@ -91,6 +95,7 @@ const AgentForm = () => {
         alert("Successfully Created!")
         navigate('/bi/profile')
         window.location.reload();
+        setLoad(false)
       }
     }
   }
@@ -275,7 +280,9 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
         </div>
        
       <div className='p-4'>
-        <button type="button" class="btn btn-outline-success btn-lg" onClick={handlerEscForm}>Submit</button>
+        <button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" onClick={handlerEscForm} disabled={load}>
+          Submit {load && <BtnLoader/>}
+        </button>
       </div>
     </div>
 </div>
