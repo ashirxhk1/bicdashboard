@@ -72,6 +72,16 @@ export const fetchuserbyid = async (id) => {
     return res
 }
 
+export const retrieveReport = async (name) => {
+    let token = cookie.get('bictoken')
+    const res = await axios.get(`${baseUrl}/getuserdata/${name}`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
 export const createteamLeaders = async (data) => {
     let token = cookie.get('bictoken')
     const res = await axios.post(`${baseUrl}/createteamLeaders`,data,{

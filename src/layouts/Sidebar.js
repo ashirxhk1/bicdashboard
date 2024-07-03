@@ -34,7 +34,7 @@ const Sidebar = () => {
   }
   return (
     <div className="p-3 position-fixed" style={{width:'260px'}}>
-      <div className="d-flex align-items-center">
+      <div className="d-flex align-items-center" style={{cursor:'pointer'}}>
         <Logo />
         <span className="ms-auto d-lg-none">
         <Button

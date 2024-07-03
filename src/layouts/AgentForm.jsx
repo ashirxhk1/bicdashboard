@@ -70,6 +70,7 @@ const AgentForm = () => {
       evaluation.evaluationsummary.trim() === ''
     ){
       alert("Please fill fields!")
+      setLoad(false)
       return
     }else{
       const getUser = JSON.parse(localStorage.getItem('bicuserData'))

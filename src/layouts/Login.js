@@ -28,6 +28,7 @@ function Login() {
     setLoad(true)
     if (email.trim() === '' || password.trim() === '') {
       alert('Please fill in all fields');
+      setLoad(false)
       return;
     } else {
       let data = { email, password };
@@ -45,14 +46,18 @@ function Login() {
           window.location.reload();
           setLoad(false)
         } else {
+          setLoad(false)
           alert('Login failed. Please check your credentials.');
         }
       } catch (error) {
         if (error.response) {
+          setLoad(false)
           alert(`Error: ${error.response.data.message || 'An error occurred'}`);
         } else if (error.request) {
+          setLoad(false)
           alert('No response received from the server. Please try again later.');
         } else {
+          setLoad(false)
           alert('An error occurred. Please try again later.');
         }
       }
