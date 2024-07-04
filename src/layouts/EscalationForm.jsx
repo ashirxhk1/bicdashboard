@@ -126,7 +126,7 @@ const EscalationForm = () => {
         <div className='w-50 bg-gray d-flex flex-column gap-3'>
             <div className='bg-card-color rounded d-flex justify-content-center flex-column align-items-center my-60px mx-50px'>
                 <h1 className='fw-bolder'>BI COM</h1>
-                <h3 className='text-danger'>Escalation Form</h3>
+                <h2 className='text-danger'>Escalation Form</h2>
             </div>
             <div className='bg-card-color rounded d-flex justify-content-center flex-column '>
   
