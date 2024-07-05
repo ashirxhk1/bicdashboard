@@ -126,7 +126,7 @@ const EscalationForm = () => {
     <div className='d-flex justify-content-center'>
         <div className='w-50 bg-gray d-flex flex-column gap-3'>
             <div className='bg-card-color rounded d-flex justify-content-center flex-column align-items-center my-60px mx-50px'>
-                <h1 className='fw-bolder'>BI COM</h1>
+                <h1 className='fw-bolder'>BI COMM</h1>
                 <h2 className='text-danger'>Escalation Form</h2>
             </div>
             <div className='bg-card-color rounded d-flex justify-content-center flex-column '>
@@ -259,8 +259,8 @@ const EscalationForm = () => {
             </div>
     <div className='bg-card-color rounded d-flex justify-content-center flex-column'>
             <div className='d-flex flex-start p-4'>
-      <label><h4>Additional successrmation</h4>
-        <p>Provide any additional successrmation relevant to the issue</p>
+      <label><h4>Additional information</h4>
+        <p>Provide any additional information relevant to the issue</p>
         <label for="exampleFormControlTextarea1">Other</label>
     <textarea class="form-control mt-1" id="exampleFormControlTextarea1" placeholder='Your Answer' rows="3" value={escalation.successmaration}
     onChange={(e) => handlerEscalation('successmaration',e.target.value)}></textarea>
