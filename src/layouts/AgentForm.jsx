@@ -105,7 +105,7 @@ const AgentForm = () => {
     <div className='d-flex justify-content-center'>
     <div className='w-50 bg-gray d-flex flex-column gap-3'>
         <div className='rounded d-flex justify-content-center flex-column align-items-center bg-card-color'>
-            <h1 className='fw-bolder'>BI COM</h1>
+            <h1 className='fw-bolder'>BI COMM</h1>
             <h3 className='text-success'>Evaluation Form</h3>
         </div>
         <div className='rounded d-flex justify-content-center flex-column bg-card-color'>
