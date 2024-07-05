@@ -57,3 +57,7 @@
 .bg-card-color{
   background-color: #fff !important;
 }
+
+.sc-none::-webkit-scrollbar{
+  display: none;
+}

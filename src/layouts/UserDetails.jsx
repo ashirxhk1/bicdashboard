@@ -1,11 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import ReactApexChart from "react-apexcharts"
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { fetchuserbyid } from '../features/userApis'
 import { Col,Card,CardTitle,Table,CardBody} from 'reactstrap'
 
 const UserDetails = () => {
   const param = useParams()
+  const navigate = useNavigate()
   const [userDetails,setUserDetails] = useState([])
   const [audioUrls, setAudioUrls] = useState([]);
   const [options, setOptions] = useState({
@@ -138,11 +139,16 @@ const UserDetails = () => {
         }
     }, [userDetails]);
 
+    const handlerUserReport = (name) => {
+      navigate(`/bi/agentReport/${name}`)
+
+    }
+
   return (
-    <div>
-      <ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} />
-      <ReactApexChart options={options?.options} series={options?.series} type="area" height={350} />
-      <div style={{overflowX:'scroll'}}>
+    <div className='d-flex flex-column gap-3'>
+      <div className='rounded' style={{backgroundColor:'#fff'}}><ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} /></div>
+      <div className='rounded p-3' style={{backgroundColor:'#fff'}}><ReactApexChart options={options?.options} series={options?.series} type="area" height={350} /></div>
+      <div className='sc-none' style={{overflowX:'scroll'}} >
       <Col lg="12" style={{width:'max-content'}}>
         <Card>
           <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
@@ -168,10 +174,10 @@ const UserDetails = () => {
                   <th>Audio</th>
                 </tr>
               </thead>
-              <tbody style={{overflowX:'scroll'}}>
+              <tbody  style={{overflowX:'scroll'}} >
                 {userDetails?.user?.escalationdetail?.map((val,index) => {
                   return(
-                  <tr style={{overflowX:'hidden'}} key={index}>
+                  <tr style={{overflowX:'hidden',cursor:'pointer'}} key={index} onClick={() => handlerUserReport(val?.agentName)}>
                     <th scope="row">{index+1}</th>
                     <td>{val?.useremail}</td>
                     <td>{val?.leadID}</td>

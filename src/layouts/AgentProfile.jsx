@@ -10,7 +10,7 @@ const Model = lazy(() => import('../views/ui/Model.js'))
 
 const AgentProfile = () => {
     const Navigation = useNavigate()
-    const user = JSON.parse(localStorage.getItem('bicuserData'))
+    // const user = JSON.parse(localStorage.getItem('bicuserData'))
     
     // const Nav = () =>{
     //     Navigation('/bi/agentform')
@@ -30,7 +30,7 @@ const AgentProfile = () => {
                 {user?.role === 'admin' && <Model/>}
             </div> */}
             <div className="w-100">
-                {user?.role === 'admin' && <ProjectTables/>}
+                <ProjectTables/>
             </div>
             {/* <Row>
                 <Col lg='4' md='6' xs='12' className="px-0">

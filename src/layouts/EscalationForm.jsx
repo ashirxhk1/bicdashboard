@@ -88,6 +88,7 @@ const EscalationForm = () => {
       escalation.successmaration.trim() === ''
     ){
       alert("Please fill fields!")
+      setLoad(false)
       return
     }else{
       const getUser = JSON.parse(localStorage.getItem('bicuserData'))
