@@ -1,6 +1,7 @@
 import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { useState,useEffect } from "react";
+import Loader from "../../layouts/loader/Loader";
 import { fetchallusers } from "../../features/userApis";
 import user1 from "../../assets/images/users/user1.jpg";
 import user2 from "../../assets/images/users/user2.jpg";
@@ -44,6 +45,7 @@ const tableData = [
 
 const ProjectTables = () => {
   const [userDetails,setUserDetails] = useState([])
+  const [isLoading,setLoading] = useState(false)
   const { toggleSidebar } = useSidebar();
   const navigate = useNavigate();
   const handlerProfile = (id) => {
@@ -52,15 +54,19 @@ const ProjectTables = () => {
     // toggleSidebar();
   };
   const getallUsers = async () => {
+    setLoading(true)
     const {data} = await fetchallusers()
-    setUserDetails(data)
+    if(data.success){
+      setUserDetails(data)
+      setLoading(false)
+    }
   }
   
   useEffect(() => {
     getallUsers()
   },[])
 
-  // console.log(userDetails);
+
 
   return (
     <div>
@@ -70,7 +76,7 @@ const ProjectTables = () => {
           <CardSubtitle className="mb-2 text-muted" tag="h6">
             Overview of the projects
           </CardSubtitle>
-
+          {isLoading ? <div style={{width:'100%',display:'flex',justifyContent:'center'}}><Loader/></div> :
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
@@ -101,7 +107,7 @@ const ProjectTables = () => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table>}
         </CardBody>
       </Card>
     </div>
@@ -109,3 +115,4 @@ const ProjectTables = () => {
 };
 
 export default ProjectTables;
+

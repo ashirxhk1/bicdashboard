@@ -15,7 +15,7 @@ const AgentReport = () => {
         getReport()
     },[])
 
-    console.log(userReport)
+    // console.log(userReport)
 
   return (
     <div className='mt-5'>
