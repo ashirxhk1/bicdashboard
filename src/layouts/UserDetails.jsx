@@ -3,49 +3,60 @@ import ReactApexChart from "react-apexcharts"
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchuserbyid } from '../features/userApis'
 import { Col,Card,CardTitle,Table,CardBody} from 'reactstrap'
+import Loader from './loader/Loader'
 
 const UserDetails = () => {
   const param = useParams()
   const navigate = useNavigate()
+  const [isLoading,setIsLoading] = useState(false)
   const [userDetails,setUserDetails] = useState([])
   const [audioUrls, setAudioUrls] = useState([]);
   const [options, setOptions] = useState({
-    series: [{
-      name: "Ratings",
-  }],
-  options: {
-    chart: {
-      height: 350,
-      type: 'line',
-      zoom: {
+      series: [{
+        name: "Ratings",
+      }],
+    options: {
+      chart: {
+        height: 350,
+        type: 'line',
+        zoom: {
+          enabled: true
+        },
+        toolbar:{
+          show:true
+        }
+      },
+      dataLabels: {
         enabled: false
+      },
+      stroke: {
+        curve: 'straight'
+      },
+      title: {
+        text: 'Evaluated User Ratings',
+        align: 'left'
+      },
+      grid: {
+        row: {
+          colors: ['#f3f3f3', 'transparent'],
+          opacity: 0.5
+        },
+      },
+      xaxis:{
+        labels:{
+          show:false,
+        }
       }
     },
-    dataLabels: {
-      enabled: false
-    },
-    stroke: {
-      curve: 'straight'
-    },
-    title: {
-      text: 'Evaluated User Ratings',
-      align: 'left'
-    },
-    grid: {
-      row: {
-        colors: ['#f3f3f3', 'transparent'],
-        opacity: 0.5
-      },
-    },
-    // xaxis: {
-    //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-    // }
-  },
-
-
   });
+  
   const getUser = async () => {
+    setIsLoading(true)
     const {data} = await fetchuserbyid(param.id)
+    if(data.success){
+      setIsLoading(false)
+  
+    }
     setUserDetails(data)
   }
 
@@ -53,7 +64,7 @@ const UserDetails = () => {
     getUser()
   },[])
   // console.log(userDetails?.counts);
-    const [usergraph,setUserGraph] = useState( { 
+    const [usergraph,setUserGraph] = useState({ 
         series: [ Number(userDetails?.counts?.good), Number(userDetails?.counts?.average), Number(userDetails?.counts?.bad)],
         options: {
           chart: {
@@ -81,9 +92,8 @@ const UserDetails = () => {
           },
           labels: [ 'Good', 'Average', 'Bad'],
         },
-      
-      
       })
+      
     useEffect(() => {
         if (userDetails?.counts) {
           setUserGraph((pre) => ({
@@ -123,7 +133,7 @@ const UserDetails = () => {
         if(userDetails?.user?.escalationdetail){
           const fetchAudioUrls = async () => {
             const urls = await Promise.all(
-              userDetails.user.escalationdetail.map(async (val) => {
+              userDetails?.user?.escalationdetail?.map(async (val) => {
                 var url = val?.audio?.replace("uploads\\", "");
                 const response = await fetch(`http://localhost:8000/${url}`);
                 if (response) {
@@ -141,11 +151,12 @@ const UserDetails = () => {
 
     const handlerUserReport = (name) => {
       navigate(`/bi/agentReport/${name}`)
-
     }
 
   return (
     <div className='d-flex flex-column gap-3'>
+      {isLoading ? <div style={{width:'100%',display:'flex',justifyContent:'center'}}><Loader/></div> :
+      <> 
       <div className='rounded' style={{backgroundColor:'#fff'}}><ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} /></div>
       <div className='rounded p-3' style={{backgroundColor:'#fff'}}><ReactApexChart options={options?.options} series={options?.series} type="area" height={350} /></div>
       <div className='sc-none' style={{overflowX:'scroll'}} >
@@ -208,6 +219,7 @@ const UserDetails = () => {
         </Card>
       </Col>
       </div>
+      </>}
     </div>
   )
 }
