@@ -116,6 +116,8 @@ const EscalationForm = () => {
         navigate("/bi/profile")
         window.location.reload();
         setLoad(false)
+      }else{
+        setLoad(false)
       }
     }
   }
@@ -274,7 +276,10 @@ const EscalationForm = () => {
   </label>
 </div>
 <div className='p-4'>
-<button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" onClick={handlerEscForm} disabled={load}>
+<button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" 
+  onClick={handlerEscForm} disabled={load}
+  style={{backgroundColor:'#39c449',color:"#fff"}}
+>
   Submit {load && <BtnLoader/>}
 </button>
 </div>

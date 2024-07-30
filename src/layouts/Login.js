@@ -68,8 +68,7 @@ function Login() {
   return (
     <MDBContainer
       fluid
-      className="p-4 background-radial-gradient overflow-hidden d-flex justify-content-center align-items-center"
-    >
+      className="p-4 background-radial-gradient overflow-hidden d-flex justify-content-center align-items-center">
       <MDBRow>
         <MDBCol
           md="6"

@@ -3,12 +3,14 @@ import ReactApexChart from "react-apexcharts"
 import { useNavigate, useParams } from 'react-router-dom'
 import { fetchuserbyid } from '../features/userApis'
 import { Col,Card,CardTitle,Table,CardBody} from 'reactstrap'
+import Loader from './loader/Loader'
 
 const UserDetails = () => {
   const param = useParams()
   const navigate = useNavigate()
   const [userDetails,setUserDetails] = useState([])
   const [audioUrls, setAudioUrls] = useState([]);
+  const [isLoading,setIsLoading] = useState(false)
   const [options, setOptions] = useState({
     series: [{
       name: "Ratings",
@@ -18,7 +20,7 @@ const UserDetails = () => {
       height: 350,
       type: 'line',
       zoom: {
-        enabled: false
+        enabled: true
       }
     },
     dataLabels: {
@@ -37,16 +39,23 @@ const UserDetails = () => {
         opacity: 0.5
       },
     },
-    // xaxis: {
-    //   categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-    // }
+    xaxis: {
+      // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+      labels:{
+        show:false
+      }
+    }
   },
 
 
   });
   const getUser = async () => {
+    setIsLoading(true)
     const {data} = await fetchuserbyid(param.id)
-    setUserDetails(data)
+    if(data.success){
+      setIsLoading(false)
+      setUserDetails(data)
+    }
   }
 
   useEffect(() => {
@@ -146,68 +155,72 @@ const UserDetails = () => {
 
   return (
     <div className='d-flex flex-column gap-3'>
-      <div className='rounded' style={{backgroundColor:'#fff'}}><ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} /></div>
-      <div className='rounded p-3' style={{backgroundColor:'#fff'}}><ReactApexChart options={options?.options} series={options?.series} type="area" height={350} /></div>
-      <div className='sc-none' style={{overflowX:'scroll'}} >
-      <Col lg="12" style={{width:'max-content'}}>
-        <Card>
-          <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
-            User : {userDetails?.user?.name}
-          </CardTitle>
-          <CardBody>
-            <Table bordered>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Email</th>
-                  <th>Lead ID</th>
-                  <th>Evaluated by</th>
-                  <th>Agent Name</th>
-                  <th>Team Leader</th>
-                  <th>Lead Source</th>
-                  <th>User Rating</th>
-                  <th>Lead Status</th>
-                  <th>Escalation Severity</th>
-                  <th>Issue Identification</th>
-                  <th>Escalation Action</th>
-                  <th>Additional successrmation</th>
-                  <th>Audio</th>
-                </tr>
-              </thead>
-              <tbody  style={{overflowX:'scroll'}} >
-                {userDetails?.user?.escalationdetail?.map((val,index) => {
-                  return(
-                  <tr style={{overflowX:'hidden',cursor:'pointer'}} key={index} onClick={() => handlerUserReport(val?.agentName)}>
-                    <th scope="row">{index+1}</th>
-                    <td>{val?.useremail}</td>
-                    <td>{val?.leadID}</td>
-                    <td>{val?.evaluatedby}</td>
-                    <td>{val?.agentName}</td>
-                    <td>{val?.teamleader}</td>
-                    <td>{val?.leadsource}</td>
-                    <td>{val?.userrating}</td>
-                    <td>{val?.leadstatus}</td>
-                    <td>{val?.escalationseverity}</td>
-                    <td>{val?.issueidentification}</td>
-                    <td>{val?.escalationaction}</td>
-                    <td>{val?.additionalsuccessrmation}</td>
-                    <td>
-                      {audioUrls[index] ? (
-                          <audio controls>
-                            <source src={audioUrls[index]} type="audio/mpeg" />
-                          </audio>
-                        ) : (
-                          'Loading...'
-                        )}
-                    </td>
+      {isLoading ?  <div><Loader/></div> : 
+      <>
+        <div className='rounded' style={{backgroundColor:'#fff'}}><ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} /></div>
+        <div className='rounded p-3' style={{backgroundColor:'#fff'}}><ReactApexChart options={options?.options} series={options?.series} type="area" height={350} /></div>
+        <div className='sc-none' style={{overflowX:'scroll'}} >
+        <Col lg="12" style={{width:'max-content'}}>
+          <Card>
+            <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
+              User : {userDetails?.user?.name}
+            </CardTitle>
+            <CardBody>
+              <Table bordered>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Email</th>
+                    <th>Lead ID</th>
+                    <th>Evaluated by</th>
+                    <th>Agent Name</th>
+                    <th>Team Leader</th>
+                    <th>Lead Source</th>
+                    <th>User Rating</th>
+                    <th>Lead Status</th>
+                    <th>Escalation Severity</th>
+                    <th>Issue Identification</th>
+                    <th>Escalation Action</th>
+                    <th>Additional successrmation</th>
+                    <th>Audio</th>
                   </tr>
-                )})}
-              </tbody>
-            </Table>
-          </CardBody>
-        </Card>
-      </Col>
-      </div>
+                </thead>
+                <tbody  style={{overflowX:'scroll'}} >
+                  {userDetails?.user?.escalationdetail?.map((val,index) => {
+                    return(
+                    <tr style={{overflowX:'hidden',cursor:'pointer'}} key={index} onClick={() => handlerUserReport(val?.agentName)}>
+                      <th scope="row">{index+1}</th>
+                      <td>{val?.useremail}</td>
+                      <td>{val?.leadID}</td>
+                      <td>{val?.evaluatedby}</td>
+                      <td>{val?.agentName}</td>
+                      <td>{val?.teamleader}</td>
+                      <td>{val?.leadsource}</td>
+                      <td>{val?.userrating}</td>
+                      <td>{val?.leadstatus}</td>
+                      <td>{val?.escalationseverity}</td>
+                      <td>{val?.issueidentification}</td>
+                      <td>{val?.escalationaction}</td>
+                      <td>{val?.additionalsuccessrmation}</td>
+                      <td>
+                        {audioUrls[index] ? (
+                            <audio controls>
+                              <source src={audioUrls[index]} type="audio/mpeg" />
+                            </audio>
+                          ) : (
+                            'Loading...'
+                          )}
+                      </td>
+                    </tr>
+                  )})}
+                </tbody>
+              </Table>
+            </CardBody>
+          </Card>
+        </Col>
+        </div>
+      </>
+      }
     </div>
   )
 }
