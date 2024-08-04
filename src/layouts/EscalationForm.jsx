@@ -5,6 +5,7 @@ import { escalationApi,fetchleaders,leaddelete } from '../features/userApis'
 import LeadModel from '../views/ui/LeadModel'
 import { useNavigate } from 'react-router-dom';
 import BtnLoader from "./loader/BtnLoader";
+import { socket } from '../socket';
 
 const EscalationForm = () => {
   const navigate = useNavigate()
@@ -113,6 +114,7 @@ const EscalationForm = () => {
           audio:null
         })
         alert("Successfully Created!")
+        socket.emit('sent-notification',{id:id,username:getUser.name,description:'submitted Escalation form!',userRoom:'notification-Room'})
         navigate("/bi/profile")
         window.location.reload();
         setLoad(false)

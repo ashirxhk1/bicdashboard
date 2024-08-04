@@ -134,7 +134,7 @@ const UserDetails = () => {
             const urls = await Promise.all(
               userDetails.user.escalationdetail.map(async (val) => {
                 var url = val?.audio?.replace("uploads\\", "");
-                const response = await fetch(`http://localhost:8000/${url}`);
+                const response = await fetch(`https://backendbic.onrender.com/audio/${url}`);
                 if (response) {
                   return response?.url;
                 } else {
@@ -147,7 +147,7 @@ const UserDetails = () => {
           fetchAudioUrls();
         }
     }, [userDetails]);
-
+    // https://backendbic.onrender.com
     const handlerUserReport = (name) => {
       navigate(`/bi/agentReport/${name}`)
 

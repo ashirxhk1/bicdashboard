@@ -3,6 +3,7 @@ import { Input } from 'reactstrap'
 import { evaluationApi } from '../features/userApis'
 import {useNavigate} from 'react-router-dom'
 import BtnLoader from './loader/BtnLoader'
+import { socket } from '../socket'
 
 const AgentForm = () => {
   const navigate = useNavigate()
@@ -94,6 +95,7 @@ const AgentForm = () => {
           rating:''
         })
         alert("Successfully Created!")
+        socket.emit('sent-notification',{id:id,username:getUser.name,description:'submitted Evaluation form!',userRoom:'notification-Room'})
         navigate('/bi/profile')
         window.location.reload();
         setLoad(false)
@@ -103,6 +105,7 @@ const AgentForm = () => {
     }
   }
   
+
   return (
     <div className='d-flex justify-content-center'>
     <div className='w-50 bg-gray d-flex flex-column gap-3'>
