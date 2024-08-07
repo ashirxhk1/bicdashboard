@@ -11,7 +11,6 @@ const UserDetails = () => {
   const [isLoading,setIsLoading] = useState(false)
   const [userDetails,setUserDetails] = useState([])
   const [audioUrls, setAudioUrls] = useState([]);
-  const [isLoading,setIsLoading] = useState(false)
   const [options, setOptions] = useState({
 
     series: [{
