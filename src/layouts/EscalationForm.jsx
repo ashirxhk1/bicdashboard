@@ -5,6 +5,7 @@ import { escalationApi,fetchleaders,leaddelete } from '../features/userApis'
 import LeadModel from '../views/ui/LeadModel'
 import { useNavigate } from 'react-router-dom';
 import BtnLoader from "./loader/BtnLoader";
+import { socket } from '../socket';
 
 const EscalationForm = () => {
   const navigate = useNavigate()
@@ -113,8 +114,11 @@ const EscalationForm = () => {
           audio:null
         })
         alert("Successfully Created!")
+        socket.emit('sent-notification',{id:id,username:getUser.name,description:'submitted Escalation form!',userRoom:'notification-Room'})
         navigate("/bi/profile")
         window.location.reload();
+        setLoad(false)
+      }else{
         setLoad(false)
       }
     }
@@ -274,10 +278,18 @@ const EscalationForm = () => {
   </label>
 </div>
 <div className='p-4'>
+<button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" 
+  onClick={handlerEscForm} disabled={load}
+  style={{backgroundColor:'#39c449',color:"#fff"}}
+>
+  Submit {load && <BtnLoader/>}
+</button>
+
   <button type="button" class="btn btn-lg d-flex gap-2 justify-content-center align-content-center"
   style={{backgroundColor:'#39c449',color:'#fff'}} onClick={handlerEscForm} disabled={load}>
     Submit {load && <BtnLoader/>}
   </button>
+
 </div>
         </div>
     </div>

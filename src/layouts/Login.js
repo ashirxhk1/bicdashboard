@@ -35,11 +35,10 @@ function Login() {
       
       try {
         const res = await LoginApi(data);
-        
         if (res.status === 200 && res.data.success === true) {
           localStorage.setItem(
             "bicuserData",
-            JSON.stringify({ email: res.data.user.email, id: res.data.user._id, role: res.data.user.role })
+            JSON.stringify({ email: res.data.user.email, id: res.data.user._id, role: res.data.user.role, name:res.data.user.name})
           );
           cookie.set("bictoken", res.data.token);
           nav("bi/profile");
@@ -68,8 +67,7 @@ function Login() {
   return (
     <MDBContainer
       fluid
-      className="p-4 background-radial-gradient overflow-hidden d-flex justify-content-center align-items-center"
-    >
+      className="p-4 background-radial-gradient overflow-hidden d-flex justify-content-center align-items-center">
       <MDBRow>
         <MDBCol
           md="6"

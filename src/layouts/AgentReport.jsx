@@ -87,7 +87,7 @@ const AgentReport = () => {
                 <Col lg="12" style={{width:'max-content'}}>
                     <Card>
                     <CardTitle tag="h6" className="border-bottom p-3 mb-0 fw-bold">
-                        No of Escalation {userReport?.ev?.length}
+                        No of Evaluation {userReport?.ev?.length}
                     </CardTitle>
                     <CardBody>
                         <Table bordered>
@@ -150,3 +150,4 @@ const AgentReport = () => {
 }
 
 export default AgentReport
+

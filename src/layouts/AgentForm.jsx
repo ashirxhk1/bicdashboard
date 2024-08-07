@@ -3,6 +3,7 @@ import { Input } from 'reactstrap'
 import { evaluationApi } from '../features/userApis'
 import {useNavigate} from 'react-router-dom'
 import BtnLoader from './loader/BtnLoader'
+import { socket } from '../socket'
 
 const AgentForm = () => {
   const navigate = useNavigate()
@@ -94,15 +95,16 @@ const AgentForm = () => {
           rating:''
         })
         alert("Successfully Created!")
+        socket.emit('sent-notification',{id:id,username:getUser.name,description:'submitted Evaluation form!',userRoom:'notification-Room'})
         navigate('/bi/profile')
         window.location.reload();
         setLoad(false)
-      }else if(!data.data.success){
         setLoad(false)
       }
     }
   }
   
+
   return (
     <div className='d-flex justify-content-center'>
     <div className='w-50 bg-gray d-flex flex-column gap-3'>
@@ -283,6 +285,11 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
         </div>
        
       <div className='p-4'>
+        <button type="button" class="btn btn-outline-success btn-lg d-flex gap-2 justify-content-center align-content-center" 
+          onClick={handlerEscForm} disabled={load}
+          style={{backgroundColor:'#39c449',color:"#fff"}}
+        >
+
         <button type="button" class="btn btn-lg d-flex gap-2 justify-content-center align-content-center" style={{backgroundColor:'#39c449',color:'#fff'}} 
           onClick={handlerEscForm} disabled={load}>
           Submit {load && <BtnLoader/>}

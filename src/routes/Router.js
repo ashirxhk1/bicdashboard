@@ -36,6 +36,7 @@ const ThemeRoutes = [
 export default ThemeRoutes;
 
 
+
 // const Starter = lazy(() => import("../views/Starter.js"));
 // const About = lazy(() => import("../views/About.js"));
 // const Alerts = lazy(() => import("../views/ui/Alerts"));

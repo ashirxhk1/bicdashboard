@@ -2,7 +2,6 @@ import axios from "axios"
 import Cookies from "universal-cookie"
 const cookie = new Cookies
 const baseUrl = 'https://backendbic.onrender.com'
-// const baseUrl = 'http://localhost:8000'
 export const LoginApi = async (data) => {
     const res = await axios.post(`${baseUrl}/login`,data)
     return res
@@ -96,6 +95,16 @@ export const createteamLeaders = async (data) => {
 export const leaddelete = async (id) => {
     let token = cookie.get('bictoken')
     const res = await axios.delete(`${baseUrl}/leaddelete/${id}`,{
+        headers:{
+            Authorization: `Bearer ${token}`
+        }
+    })
+    return res
+}
+
+export const getNotification = async () => {
+    let token = cookie.get('bictoken')
+    const res = await axios.get(`${baseUrl}/notification`,{
         headers:{
             Authorization: `Bearer ${token}`
         }
