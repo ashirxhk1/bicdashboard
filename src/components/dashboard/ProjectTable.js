@@ -45,6 +45,7 @@ const tableData = [
 
 const ProjectTables = () => {
   const [userDetails,setUserDetails] = useState([])
+  const [isLoading,setLoading] = useState(false)
   const { toggleSidebar } = useSidebar();
   const [isLoading,setLoading] = useState(false)
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ const ProjectTables = () => {
     getallUsers()
   },[])
 
-  // console.log(userDetails);
+
 
   return (
     <div>
@@ -77,6 +78,9 @@ const ProjectTables = () => {
           <CardSubtitle className="mb-2 text-muted" tag="h6">
             Overview of the projects
           </CardSubtitle>
+
+          {isLoading ? <div style={{width:'100%',display:'flex',justifyContent:'center'}}><Loader/></div> :
+
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
               <tr>
@@ -107,7 +111,7 @@ const ProjectTables = () => {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table>}
         </CardBody>
       </Card>}
     </div>
@@ -115,3 +119,4 @@ const ProjectTables = () => {
 };
 
 export default ProjectTables;
+

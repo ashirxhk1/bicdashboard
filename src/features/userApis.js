@@ -2,7 +2,6 @@ import axios from "axios"
 import Cookies from "universal-cookie"
 const cookie = new Cookies
 const baseUrl = 'https://backendbic.onrender.com'
-// const baseUrl = 'http://localhost:8000' 
 export const LoginApi = async (data) => {
     const res = await axios.post(`${baseUrl}/login`,data)
     return res

@@ -78,7 +78,7 @@ const AgentForm = () => {
       const id = getUser.id
       evaluation._id = id
       const data = await evaluationApi(evaluation)
-      if(data.data.success === true){
+      if(data.data.success){
         setEvaluation({
           email:'',
           leadId:'',
@@ -99,7 +99,6 @@ const AgentForm = () => {
         navigate('/bi/profile')
         window.location.reload();
         setLoad(false)
-      }else{
         setLoad(false)
       }
     }
@@ -110,7 +109,7 @@ const AgentForm = () => {
     <div className='d-flex justify-content-center'>
     <div className='w-50 bg-gray d-flex flex-column gap-3'>
         <div className='rounded d-flex justify-content-center flex-column align-items-center bg-card-color'>
-            <h1 className='fw-bolder'>BI COM</h1>
+            <h1 className='fw-bolder'>BI COMM</h1>
             <h3 className='text-success'>Evaluation Form</h3>
         </div>
         <div className='rounded d-flex justify-content-center flex-column bg-card-color'>
@@ -290,6 +289,9 @@ checked={evaluation.closing==='mark'} onChange={(e) => {
           onClick={handlerEscForm} disabled={load}
           style={{backgroundColor:'#39c449',color:"#fff"}}
         >
+
+        <button type="button" class="btn btn-lg d-flex gap-2 justify-content-center align-content-center" style={{backgroundColor:'#39c449',color:'#fff'}} 
+          onClick={handlerEscForm} disabled={load}>
           Submit {load && <BtnLoader/>}
         </button>
       </div>
