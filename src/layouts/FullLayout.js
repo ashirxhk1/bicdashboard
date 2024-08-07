@@ -20,7 +20,7 @@ const FullLayout = () => {
         </aside>
         {/********Content Area**********/}
 
-        <div className="contentArea" style={{width:'100vw'}}>
+        <div className="contentArea">
           {/********header**********/}
           <Header />
           {/********Middle Content**********/}
