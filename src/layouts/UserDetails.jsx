@@ -10,9 +10,8 @@ const UserDetails = () => {
   const navigate = useNavigate()
   const [isLoading,setIsLoading] = useState(false)
   const [userDetails,setUserDetails] = useState([])
-  const [audioUrls, setAudioUrls] = useState([]);
+  const [audioUrls, setAudioUrls] = useState([]); 
   const [options, setOptions] = useState({
-
     series: [{
       name: "Ratings",
   }],
@@ -38,44 +37,8 @@ const UserDetails = () => {
       row: {
         colors: ['#f3f3f3', 'transparent'],
         opacity: 0.5
-
-      series: [{
-        name: "Ratings",
-      }],
-    options: {
-      chart: {
-        height: 350,
-        type: 'line',
-        zoom: {
-          enabled: true
-        },
-        toolbar:{
-          show:true
-        }
       },
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'straight'
-      },
-      title: {
-        text: 'Evaluated User Ratings',
-        align: 'left'
-      },
-      grid: {
-        row: {
-          colors: ['#f3f3f3', 'transparent'],
-          opacity: 0.5
-        },
-      },
-      xaxis:{
-        labels:{
-          show:false,
-        }
-      }
     },
-
     xaxis: {
       // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
       labels:{
@@ -83,9 +46,6 @@ const UserDetails = () => {
       }
     }
   },
-
-
-
   });
   
   const getUser = async () => {
