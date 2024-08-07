@@ -47,7 +47,6 @@ const ProjectTables = () => {
   const [userDetails,setUserDetails] = useState([])
   const [isLoading,setLoading] = useState(false)
   const { toggleSidebar } = useSidebar();
-  const [isLoading,setLoading] = useState(false)
   const navigate = useNavigate();
   const handlerProfile = (id) => {
     navigate(`/bi/userdetails/${id}`);
