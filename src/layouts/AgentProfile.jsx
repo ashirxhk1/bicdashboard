@@ -29,6 +29,12 @@ const AgentProfile = () => {
 
         socket.emit('join-room',{username:user.name,userRoom:'notification-Room'})
 
+        return () => {
+            socket.off('connected')
+            socket.off('user-connect')
+            socket.disconnect()
+        }
+
     },[socket])
 
 

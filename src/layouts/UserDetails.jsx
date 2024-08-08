@@ -88,9 +88,8 @@ const UserDetails = () => {
           },
           labels: [ 'Good', 'Average', 'Bad'],
         },
-      
-      
       })
+      
     useEffect(() => {
         if (userDetails?.counts) {
           setUserGraph((pre) => ({

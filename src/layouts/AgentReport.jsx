@@ -2,10 +2,43 @@ import React,{useState,useEffect} from 'react'
 import { retrieveReport } from '../features/userApis'
 import { useParams } from 'react-router-dom'
 import { Col,Card,CardTitle,CardBody,Table } from 'reactstrap'
-
+import ReactApexChart from "react-apexcharts"
+import Loader from './loader/Loader'
 const AgentReport = () => {
     const param = useParams()
-    const [userReport,setUserReport] = useState()
+    const [isLoading,setIsLoading] = useState(false)
+    const [userReport,setUserReport] = useState()  
+
+    const [usergraph,setUserGraph] = useState( { 
+        series: [ Number(userReport?.counts?.good), Number(userReport?.counts?.average), Number(userReport?.counts?.bad)],
+        options: {
+          chart: {
+            height: 350,
+            type: 'radialBar',
+          },
+          plotOptions: {
+            radialBar: {
+              dataLabels: {
+                name: {
+                  fontSize: '22px',
+                },
+                value: {
+                  fontSize: '16px',
+                },
+                total: {
+                  show: true,
+                  label: 'Total',
+                  formatter: function (w) {
+                    return Number(userReport?.counts?.total)
+                  }
+                }
+              }
+            }
+          },
+          labels: [ 'Good', 'Average', 'Bad'],
+        },
+      })
+
     const getReport = async () => {
         const {data} = await retrieveReport(param.name)
         setUserReport(data)
@@ -15,10 +48,43 @@ const AgentReport = () => {
         getReport()
     },[])
 
-    // console.log(userReport)
+    useEffect(() => {
+        if(userReport?.counts){
+            setUserGraph((pre) => ({
+                ...pre,
+                series: [
+                  Number(userReport?.counts?.good),
+                  Number(userReport?.counts?.average),
+                  Number(userReport?.counts?.bad)
+                ],
+                options:{
+                  ...pre,
+                  plotOptions:{
+                    radialBar:{
+                      dataLabels:{
+                        ...pre,
+                        total:{
+                          ...pre,
+                          formatter: function (w) {
+                            return Number(userReport?.counts?.total)
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+              }));
+        }
+    },[userReport])
 
   return (
+    <div className='d-flex flex-column gap-3'>
+      {isLoading ?  <div><Loader/></div> : 
     <div className='mt-5'>
+        <div className='rounded mb-5' style={{backgroundColor:'#fff'}}>
+            <div style={{padding:'1rem',fontWeight:'500',fontSize:'0.9rem'}}>Escalation Ratings</div>
+            <ReactApexChart options={usergraph?.options} series={usergraph?.series} type="radialBar" height={350} />
+        </div>
         {userReport?.esc?.length > 0 && (<div className='mb-5'>
             <div className='sc-none' style={{overflowX:'scroll'}}>
                 <Col lg="12" style={{width:'max-content'}}>
@@ -145,6 +211,7 @@ const AgentReport = () => {
                 </Col>
         </div>
             </div>)}
+    </div>}
     </div>
   )
 }
